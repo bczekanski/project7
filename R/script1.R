@@ -1,4 +1,3 @@
-
 library(knitr)
 library(ws.data)
 library(dplyr)
@@ -10,6 +9,7 @@ library(reshape)
 #Dont want to use reshape long term
 library(tidyr)
 get_data <- function () {
+  library(ws.data)
 data(secref)
 data(yearly)
 data(daily.1998)
@@ -65,9 +65,9 @@ x <- tbl_df(x)
 }
 
 
-"y <- x %>%
-  filter(symbol == "AAPL"| symbol =="MSFT"| symbol =="GOOG")
-### UNdo this"
+#y <- x %>%
+ # filter(symbol == "AAPL"| symbol =="MSFT"| symbol =="GOOG")
+### UNdo this
 
 
 compute_ret <- function(y) {
@@ -111,15 +111,7 @@ y$k.ret  <- extract_numeric(y$k.ret)
 
 z <- y %>%
   filter(j.ret == j.vol)
-
-
 }
-
-
-
-
-
-
 
 
 select_data <- function(x, j, k) {
@@ -193,11 +185,4 @@ tbl_5 <- make_table2(tbl_5_data)
 # Table 6
 
 # Table 7
-
-# Table 8
-# What is it?
-
-# Table 9
-# Book-to-Market so cant do it?"
-
-
+"
