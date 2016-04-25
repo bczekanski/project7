@@ -65,9 +65,9 @@ x <- tbl_df(x)
 }
 
 
-y <- x %>%
+"y <- x %>%
   filter(symbol == "AAPL"| symbol =="MSFT"| symbol =="GOOG")
-### UNdo this
+### UNdo this"
 
 
 compute_ret <- function(y) {
@@ -167,7 +167,7 @@ make_table3 <- function(x) {
 
 
 }
-
+"
 # Table 1
 tbl_1_data <- select_data(z, c(3, 6, 9, 12), c(3, 6, 9, 12))
 tbl_1 <- make_table1(tbl_1_data)
@@ -198,6 +198,6 @@ tbl_5 <- make_table2(tbl_5_data)
 # What is it?
 
 # Table 9
-# Book-to-Market so cant do it?
+# Book-to-Market so cant do it?"
 
 

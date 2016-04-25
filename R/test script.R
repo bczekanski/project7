@@ -1,4 +1,4 @@
-library(knitr)
+"library(knitr)
 library(ws.data)
 library(dplyr)
 library(lubridate)
@@ -8,9 +8,9 @@ library(ggplot2)
 library(reshape)
 #Dont want to use reshape long term
 library(tidyr)
-```
 
-```{r}
+
+
 #get_data <- function () {
 data(secref)
 data(yearly)
@@ -123,5 +123,5 @@ z <- y %>%
 w <- z %>%
   group_by(j.ret, k.ret, prev.ret.rank, prev.vol.rank) %>%
   summarize_each(funs(mean), prev.returns, prev.vol, future.returns, cap.usd, sz.rank) %>%
-  filter(prev.ret.rank == 1| prev.ret.rank == 5| prev.ret.rank == 10)
+  filter(prev.ret.rank == 1| prev.ret.rank == 5| prev.ret.rank == 10)"
 
