@@ -29,76 +29,30 @@ y <- x %>%
 ### UNdo this
 
 z <- compute_ret(y)
+```
 
-select_data <- function(x, j, k) {
-  y <- x %>%
-    filter(j.ret %in% j)
-  z <- y %>%
-    filter(k.ret %in% k)
-  return(z)
-}
-
-make_table1 <- function(x) {
-  x %>%
+```{r}
+w <- z %>%
   na.omit() %>%
-  group_by(j.ret, j.vol, k.ret) %>%
+  filter(j.ret == j.vol) %>%
+  group_by(j.ret, j.vol, k.ret, monthYear) %>%
   mutate(prev.ret.rank = ntile(prev.returns, 10)) %>%
-  group_by(j.ret, j.vol, k.ret, prev.ret.rank) %>%
-  summarize_each(funs(mean), prev.returns, prev.vol, future.returns) %>%
-  filter(prev.ret.rank == 1| prev.ret.rank == 5| prev.ret.rank == 10)
-}
-
-make_table2 <- function(x) {
-  x %>%
-    na.omit() %>%
-    group_by(j.ret, j.vol, k.ret) %>%
-    mutate(prev.ret.rank = ntile(prev.returns, 10)) %>%
-    mutate(prev.vol.rank = ntile(prev.vol, 3)) %>%
-    group_by(j.ret, j.vol, k.ret, prev.ret.rank, prev.vol.rank) %>%
-    summarize_each(funs(mean), prev.returns, prev.vol, future.returns) %>%
-    filter(prev.ret.rank == 1| prev.ret.rank == 5| prev.ret.rank == 10)
-}
-
-make_table3 <- function(x) {
-  x %>%
-    na.omit() %>%
-    group_by(j.ret, j.vol, k.ret) %>%
-    mutate(prev.ret.rank = ntile(prev.returns, 10)) %>%
-    mutate(prev.vol.rank = ntile(prev.vol, 3)) %>%
-    group_by(j.ret, j.vol, k.ret, prev.vol.rank, prev.ret.rank) %>%
-    #summarize_each(funs(mean), prev.returns, prev.vol) %>%
-    filter(prev.ret.rank == 1| prev.ret.rank == 10) %>%
-    spread(key = prev.ret.rank, value = future.returns)
-  
-}
-
-make_table6 <- function(x) {
-  x %>%
-  na.omit() %>%
-  select(-k.ret, -future.returns) %>%
-  group_by(j.ret, j.vol ) %>%
-  mutate(prev.ret.rank = ntile(prev.returns, 10)) %>%
-  mutate(size.rank = ntile(cap.usd, 10)) %>%
+  group_by(j.ret, j.vol, k.ret, monthYear) %>%
   mutate(prev.vol.rank = ntile(prev.vol, 3)) %>%
-  group_by(j.ret, j.vol, prev.ret.rank, prev.vol.rank) %>%
-  summarize_each(funs(mean), prev.returns, prev.vol, size.rank, cap.usd) %>%
+  group_by(j.ret, j.vol, k.ret, monthYear) %>%
+  mutate(sz.rank = ntile(cap.usd, 10))
+
+v <- w %>%
+  group_by(j.ret, k.ret, prev.ret.rank, prev.vol.rank) %>%
+  summarize_each(funs(mean), prev.returns, prev.vol, future.returns, cap.usd, sz.rank) %>%
   filter(prev.ret.rank == 1| prev.ret.rank == 5| prev.ret.rank == 10)
-}
+
+
 ```
 
 
-
-
-
-x <- get_data()
-y <- x %>%
-  filter(symbol == "AAPL"| symbol =="MSFT"| symbol =="GOOG")
-### UNdo this
-z <- compute_ret(y)
-
-
 ```{r}
-tbl_1_data <- select_data(z, c(3, 6, 9, 12), c(3, 6, 9, 12))
+tbl_1_data <- select_data(v, c(3, 6, 9, 12), c(3, 6, 9, 12))
 tbl_1 <- make_table1(tbl_1_data)
 kable(tbl_1)
 # Table 2
@@ -126,11 +80,22 @@ kable(tbl_6)
 
 # Table 7
 
+```
 
+```{r}
+w <- z %>%
+  na.omit() %>%
+  filter(j.ret == j.vol) %>%
+  group_by(j.ret, j.vol, k.ret, monthYear) %>%
+  mutate(prev.ret.rank = ntile(prev.returns, 10)) %>%
+  group_by(j.ret, j.vol, k.ret, monthYear) %>%
+  mutate(prev.vol.rank = ntile(prev.vol, 3)) %>%
+  group_by(j.ret, j.vol, k.ret, monthYear) %>%
+  mutate(sz.rank = ntile(cap.usd, 10))
 
-
-
-
-
+v <- w %>%
+  group_by(j.ret, k.ret, prev.ret.rank, prev.vol.rank) %>%
+  summarize_each(funs(mean), prev.returns, prev.vol, future.returns, cap.usd, sz.rank) %>%
+  filter(prev.ret.rank == 1| prev.ret.rank == 5| prev.ret.rank == 10)
 
 ```

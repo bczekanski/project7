@@ -58,7 +58,8 @@ monthly_TV1 <- cleaned_data %>%
   mutate(outstanding_shares = cap.usd/price.unadj) %>%
   mutate(daily_turnover = volume / outstanding_shares) %>%
   group_by(monthYear, symbol) %>%
-  summarize(monthly_TV = mean(daily_turnover))
+  summarize_each(funs(mean), daily_turnover, cap.usd) %>%
+  rename(c(daily_turnover = "monthly_TV"))
 
 left_join(monthly_TV1, monthly_returns1, by = c("symbol", "monthYear")) -> x
 x <- tbl_df(x)
@@ -79,7 +80,7 @@ prior_returns <- function(y, months){
  }
 for(i in c(1:36)) {prior_returns(y, i) -> y}
 y <- y%>%
-gather(key = j.ret, value = prev.returns, 5:ncol(y))
+  gather(key = j.ret, value = prev.returns, 6:ncol(y))
 y$j.ret  <- extract_numeric(y$j.ret)
 
 prior_returns2 <- function(y, months){
@@ -91,7 +92,7 @@ prior_returns2 <- function(y, months){
 
 for(i in c(1:36)) {prior_returns2(y, i) -> y}
 y <- y%>%
-  gather(key = j.vol, value = prev.vol, 7:ncol(y))
+  gather(key = j.vol, value = prev.vol, 8:ncol(y))
 y$j.vol  <- extract_numeric(y$j.vol)
 
 prior_returns3 <- function(y, months){
@@ -103,7 +104,7 @@ prior_returns3 <- function(y, months){
 
 for(i in c(1:36)) {prior_returns3(y, i) -> y}
 y <- y %>%
-  gather(key = k.ret, value = future.returns, 9:ncol(y))
+  gather(key = k.ret, value = future.returns, 10:ncol(y))
 y$k.ret  <- extract_numeric(y$k.ret)
 
 # There needs to be some sort of lag
@@ -112,7 +113,6 @@ y$k.ret  <- extract_numeric(y$k.ret)
 z <- y %>%
   filter(j.ret == j.vol)
 }
-
 
 select_data <- function(x, j, k) {
   y <- x %>%
@@ -124,12 +124,12 @@ select_data <- function(x, j, k) {
 
 make_table1 <- function(x) {
   x %>%
-  na.omit() %>%
-  group_by(j.ret, j.vol, k.ret) %>%
-  mutate(prev.ret.rank = ntile(prev.returns, 10)) %>%
-  group_by(j.ret, j.vol, k.ret, prev.ret.rank) %>%
-  summarize_each(funs(mean), prev.returns, prev.vol, future.returns) %>%
-  filter(prev.ret.rank == 1| prev.ret.rank == 5| prev.ret.rank == 10)
+    na.omit() %>%
+    group_by(j.ret, j.vol, k.ret) %>%
+    mutate(prev.ret.rank = ntile(prev.returns, 10)) %>%
+    group_by(j.ret, j.vol, k.ret, prev.ret.rank) %>%
+    summarize_each(funs(mean), prev.returns, prev.vol, future.returns) %>%
+    filter(prev.ret.rank == 1| prev.ret.rank == 5| prev.ret.rank == 10)
 }
 
 make_table2 <- function(x) {
@@ -149,40 +149,25 @@ make_table3 <- function(x) {
     group_by(j.ret, j.vol, k.ret) %>%
     mutate(prev.ret.rank = ntile(prev.returns, 10)) %>%
     mutate(prev.vol.rank = ntile(prev.vol, 3)) %>%
-    group_by(j.ret, j.vol, k.ret, prev.ret.rank, prev.vol.rank) %>%
-    #summarize_each(funs(mean), prev.returns, prev.vol, future.returns)
-  spread(key = prev.ret.rank, value  = future.returns)
-
-
-    #filter(prev.ret.rank == 1| prev.ret.rank == 10) %>%
-    #
-
+    group_by(j.ret, j.vol, k.ret, prev.vol.rank, prev.ret.rank) %>%
+    #summarize_each(funs(mean), prev.returns, prev.vol) %>%
+    filter(prev.ret.rank == 1| prev.ret.rank == 10) %>%
+    spread(key = prev.ret.rank, value = future.returns)
 
 }
-"
-# Table 1
-tbl_1_data <- select_data(z, c(3, 6, 9, 12), c(3, 6, 9, 12))
-tbl_1 <- make_table1(tbl_1_data)
 
-# Table 2
-tbl_2_data <- select_data(z, c(3, 6, 9, 12), c(12, 24, 36))
-tbl_2 <- make_table1(tbl_2_data)
-# needs size
-
-# Table 3
-tbl_3_data <- select_data(z, c(3, 6, 9, 12), c(3, 6, 9, 12))
-tbl_3 <- make_table2(tbl_3_data)
-
-# Table 4
-tbl_4_data <- select_data(z, c(3, 6, 9, 12), c(3, 6, 9, 12))
-tbl_4_data
+make_table6 <- function(x) {
+  x %>%
+    na.omit() %>%
+    select(-k.ret, -future.returns) %>%
+    group_by(j.ret, j.vol ) %>%
+    mutate(prev.ret.rank = ntile(prev.returns, 10)) %>%
+    mutate(size.rank = ntile(cap.usd, 10)) %>%
+    mutate(prev.vol.rank = ntile(prev.vol, 3)) %>%
+    group_by(j.ret, j.vol, prev.ret.rank, prev.vol.rank) %>%
+    summarize_each(funs(mean), prev.returns, prev.vol, size.rank, cap.usd) %>%
+    filter(prev.ret.rank == 1| prev.ret.rank == 5| prev.ret.rank == 10)
+}
 
 
-# Table 5
-tbl_5_data <- select_data(z, c(3, 6, 9, 12), c(12, 24, 36))
-tbl_5 <- make_table2(tbl_5_data)
 
-# Table 6
-
-# Table 7
-"
