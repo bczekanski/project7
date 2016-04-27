@@ -125,11 +125,9 @@ select_data <- function(x, j, k) {
 make_table1 <- function(x) {
   x %>%
     na.omit() %>%
-    group_by(j.ret, k.ret) %>%
-    mutate(prev.ret.rank = ntile(prev.returns, 10)) %>%
-    group_by(j.ret, k.ret, prev.ret.rank) %>%
-    summarize_each(funs(mean), prev.returns, prev.vol, future.returns) %>%
-    filter(prev.ret.rank == 1| prev.ret.rank == 5| prev.ret.rank == 10)
+    group_by(j.ret, k.ret)
+    #summarize_each(funs(mean), prev.returns, prev.vol, future.returns) %>%
+    #filter(prev.ret.rank == 1 | prev.ret.rank == 5| prev.ret.rank == 10)
 }
 
 make_table2 <- function(x) {
