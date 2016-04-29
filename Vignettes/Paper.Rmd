@@ -19,6 +19,7 @@ library(reshape)
 #Dont want to use reshape long term
 library(tidyr)
 library(project7)
+library(htmlTable)
 ```
 
 ```{r}
@@ -29,28 +30,25 @@ y <- x %>%
 ### UNdo this
 
 z <- compute_ret(y)
-```
-
-```{r}
-w <- z %>%
-  #na.omit() %>%
-  group_by(j.ret, k.ret, monthYear) %>%
-  mutate(prev.ret.rank = ntile(prev.returns, 10)) %>%
-  group_by(j.ret, k.ret, monthYear) %>%
-  mutate(prev.vol.rank = ntile(prev.vol, 3)) %>%
-  group_by(j.ret, k.ret, monthYear) %>%
-  mutate(sz.rank = ntile(cap.usd, 10))
-
-v <- w %>%
-  group_by(j.ret, k.ret, prev.ret.rank, prev.vol.rank) %>%
-  summarize_each(funs(mean), prev.returns, prev.vol, future.returns, cap.usd, sz.rank) %>%
-  filter(prev.ret.rank == 1| prev.ret.rank == 5| prev.ret.rank == 10)
 
 
+
+w <- do_rank(z)
+
+v <- tbl_one(w)
+htmlTable(txtRound(v, 2))
 ```
 
 
-```{r}
+    htmlTable(t,
+              rgroup = c(3, 6, 9, 12),
+              n.rgroup = c(4, 4, 4, 4)
+              
+              )
+
+```
+
+
 tbl_1_data <- select_data(v, c(3, 6, 9, 12), c(3, 6, 9, 12))
 tbl_1 <- make_table1(tbl_1_data)
 kable(tbl_1)
@@ -79,22 +77,6 @@ kable(tbl_6)
 
 # Table 7
 
-```
 
-```{r}
-w <- z %>%
-  na.omit() %>%
-  filter(j.ret == j.vol) %>%
-  group_by(j.ret,  k.ret, monthYear) %>%
-  mutate(prev.ret.rank = ntile(prev.returns, 10)) %>%
-  group_by(j.ret, k.ret, monthYear) %>%
-  mutate(prev.vol.rank = ntile(prev.vol, 3)) %>%
-  group_by(j.ret, k.ret, monthYear) %>%
-  mutate(sz.rank = ntile(cap.usd, 10))
 
-v <- w %>%
-  group_by(j.ret, k.ret, prev.ret.rank, prev.vol.rank) %>%
-  summarize_each(funs(mean), prev.returns, prev.vol, future.returns, cap.usd, sz.rank) %>%
-  filter(prev.ret.rank == 1| prev.ret.rank == 5| prev.ret.rank == 10)
 
-```
