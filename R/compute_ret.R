@@ -7,7 +7,7 @@ compute_ret <- function(y) {
   }
   for(i in c(1:36)) {prior_returns(y, i) -> y}
   y <- y%>%
-    gather(key = j.ret, value = prev.returns, 6:ncol(y))
+    gather(key = j.ret, value = prev.returns, 7:ncol(y))
   y$j.ret  <- extract_numeric(y$j.ret)
 
   prior_returns2 <- function(y, months){
@@ -19,7 +19,7 @@ compute_ret <- function(y) {
 
   for(i in c(1:36)) {prior_returns2(y, i) -> y}
   y <- y%>%
-    gather(key = j.vol, value = prev.vol, 8:ncol(y))
+    gather(key = j.vol, value = prev.vol, 9:ncol(y))
   y$j.vol  <- extract_numeric(y$j.vol)
 
   prior_returns3 <- function(y, months){
@@ -31,12 +31,14 @@ compute_ret <- function(y) {
 
   for(i in c(1:36)) {prior_returns3(y, i) -> y}
   y <- y %>%
-    gather(key = k.ret, value = future.returns, 10:ncol(y))
+    gather(key = k.ret, value = future.returns, 11:ncol(y))
   y$k.ret  <- extract_numeric(y$k.ret)
 
   # There needs to be some sort of lag
   # 3-1 the j=3 is from 1-1 to 3-31, while k = 3 is 3-1 to 5-30
 
   z <- y %>%
-    filter(j.ret == j.vol)
+    mutate(month = month(monthYear)) %>%
+    filter(j.ret == j.vol, month == 1)
+
 }
