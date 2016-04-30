@@ -1,6 +1,6 @@
 do_rank <- function(x) {
   y <- x %>%
-    na.omit() %>%
+    #na.omit() %>%
     group_by(j.ret, k.ret, monthYear) %>%
     mutate(prev.ret.rank = ntile(prev.returns, 10)) %>%
     group_by(j.ret, k.ret, monthYear) %>%

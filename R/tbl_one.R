@@ -6,6 +6,7 @@ tbl_one <- function(x){
     na.omit() %>%
     group_by(j.ret, prev.ret.rank) %>%
     summarize_each(funs(mean), prev.returns, prev.vol, sz.rank, price, c(15:20)) %>%
-    filter(prev.ret.rank == 1| prev.ret.rank == 5| prev.ret.rank == 10)
+    filter(prev.ret.rank == 1| prev.ret.rank == 5| prev.ret.rank == 10) %>%
+
  return(z)
 }

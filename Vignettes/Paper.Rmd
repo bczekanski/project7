@@ -31,9 +31,46 @@ y <- x %>%
 
 z <- compute_ret(y)
 
-
+z <- z %>%
+  na.omit
 
 w <- do_rank(z)
+
+v <- select_data(w, c(3, 6, 9, 12), c(3, 6, 9, 12, 24, 36, 48, 60)) %>%
+  filter(prev.ret.rank == 1| prev.ret.rank == 5| prev.ret.rank == 10) %>%
+  group_by(j.ret, k.ret, prev.ret.rank, monthYear) %>%
+  summarize_each(funs(mean), prev.returns, prev.vol, sz.rank, price, future.returns)
+s <- v %>%
+  select(j.ret, k.ret, prev.ret.rank, future.returns) %>%
+  group_by(j.ret, k.ret, prev.ret.rank) %>%
+  summarize(future.returns = mean(future.returns)) %>%
+  spread(key = prev.ret.rank, value = future.returns) %>%
+  mutate(`0` = `10` - `1`) %>%
+  #select(j.ret, k.ret, diff) %>%
+  group_by(j.ret, k.ret) %>%
+  gather(key = prev.ret.rank, value = future.returns, `0`, `1`, `5`, `10`) %>%
+  mutate(prev.ret.rank  = as.integer(prev.ret.rank))
+d <- v %>%
+  group_by(j.ret, k.ret, prev.ret.rank) %>%
+  summarize_each(funs(mean), prev.returns, prev.vol, sz.rank, price, future.returns)
+r <- left_join(s,d, by = c("j.ret", "k.ret", "prev.ret.rank", "future.returns"))  
+# Spread ret rank out and calc diff then gather it back
+
+  t <- r %>%
+    #unite(c(7:12)) %>%
+    spread(key = k.ret, value = future.returns) %>%
+    #na.omit() %>%
+    
+    summarize_each(funs(mean), prev.returns, prev.vol, sz.rank, price, c(7:12)) %>%
+    filter(prev.ret.rank == 1| prev.ret.rank == 5| prev.ret.rank == 10)
+    
+
+
+
+
+
+
+
 
 v <- tbl_one(w)
 htmlTable(txtRound(v, 2))

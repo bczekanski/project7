@@ -12,7 +12,7 @@ compute_ret <- function(y) {
 
   prior_returns2 <- function(y, months){
     y %>%
-      group_by(symbol, j.ret) %>%
+      group_by(symbol) %>%
       mutate(mean_TV = roll_mean(monthly_TV, months, fill = NA, align = "right")) %>%
       rename(c(mean_TV = paste0(months, "_month_prior_volume")))
   }
@@ -24,7 +24,7 @@ compute_ret <- function(y) {
 
   prior_returns3 <- function(y, months){
     y %>%
-      group_by(symbol, j.ret, j.vol) %>%
+      group_by(symbol) %>%
       mutate(returns2 = roll_mean(monthly_returns, months, fill = NA, align = "left")) %>%
       rename(c(returns2 = paste0(months, "_month_future_returns")))
   }
