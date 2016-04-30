@@ -34,12 +34,16 @@ z <- compute_ret(y)
 z <- z %>%
   na.omit
 
-w <- do_rank(z)
+w <- do_rank(z) %>%
 
 v <- select_data(w, c(3, 6, 9, 12), c(3, 6, 9, 12, 24, 36, 48, 60)) %>%
   filter(prev.ret.rank == 1| prev.ret.rank == 5| prev.ret.rank == 10) %>%
-  group_by(j.ret, k.ret, prev.ret.rank, monthYear) %>%
+  group_by(j.ret, k.ret, prev.ret.rank) %>%
   summarize_each(funs(mean), prev.returns, prev.vol, sz.rank, price, future.returns)
+ 
+  
+  
+  
 s <- v %>%
   select(j.ret, k.ret, prev.ret.rank, future.returns) %>%
   group_by(j.ret, k.ret, prev.ret.rank) %>%
@@ -58,12 +62,11 @@ r <- left_join(s,d, by = c("j.ret", "k.ret", "prev.ret.rank", "future.returns"))
 
   t <- r %>%
     #unite(c(7:12)) %>%
-    spread(key = k.ret, value = future.returns) %>%
-    #na.omit() %>%
+    spread(key = k.ret, value = future.returns, drop) %>%
+    na.pass() %>%
+    group_by(j.ret, prev.ret.rank) %>%
+    summarize_each(funs(mean), prev.returns, prev.vol, sz.rank, price, c(7:12)) 
     
-    summarize_each(funs(mean), prev.returns, prev.vol, sz.rank, price, c(7:12)) %>%
-    filter(prev.ret.rank == 1| prev.ret.rank == 5| prev.ret.rank == 10)
-    
 
 
 
@@ -72,8 +75,8 @@ r <- left_join(s,d, by = c("j.ret", "k.ret", "prev.ret.rank", "future.returns"))
 
 
 
-v <- tbl_one(w)
-htmlTable(txtRound(v, 2))
+v <- tbl_one()
+htmlTable(txtRound(t, 2))
 ```
 
 
