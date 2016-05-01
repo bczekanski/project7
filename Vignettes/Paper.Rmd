@@ -24,6 +24,50 @@ library(htmlTable)
 
 ```{r}
 x <- get_data()
+x -> y
+
+prior_returns <- function(y, months){
+    y %>%
+      group_by(symbol) %>%
+      mutate(returns = roll_mean(monthly_returns, months, fill = NA, align = "right")) %>%
+      rename(c(returns = paste0(months, "_month_prior_returns")))
+  }
+  for(i in c(1:36)) {prior_returns(y, i) -> y}
+  y <- y%>%
+    gather(key = j.ret, value = prev.returns, 7:ncol(y))
+  y$j.ret  <- extract_numeric(y$j.ret)
+
+  prior_returns2 <- function(y, months){
+    y %>%
+      group_by(symbol) %>%
+      mutate(mean_TV = roll_mean(monthly_TV, months, fill = NA, align = "right")) %>%
+      rename(c(mean_TV = paste0(months, "_month_prior_volume")))
+  }
+
+  for(i in c(1:36)) {prior_returns2(y, i) -> y}
+  y <- y%>%
+    gather(key = j.vol, value = prev.vol, 9:ncol(y))
+  y$j.vol  <- extract_numeric(y$j.vol)
+
+  prior_returns3 <- function(y, months){
+    y %>%
+      group_by(symbol) %>%
+      mutate(returns2 = roll_mean(monthly_returns, months, fill = NA, align = "left")) %>%
+      rename(c(returns2 = paste0(months, "_month_future_returns")))
+  }
+
+  for(i in c(1:36)) {prior_returns3(y, i) -> y}
+  y <- y %>%
+    gather(key = k.ret, value = future.returns, 11:ncol(y))
+  y$k.ret  <- extract_numeric(y$k.ret)
+
+  # There needs to be some sort of lag
+  # 3-1 the j=3 is from 1-1 to 3-31, while k = 3 is 3-1 to 5-30
+
+  y <- y %>%
+    mutate(month = month(monthYear)) %>%
+    filter(j.ret == j.vol, month == 1)
+
 
 y <- x %>%
  filter(symbol == "AAPL"| symbol =="MSFT"| symbol =="GOOG" | symbol == "FSLR" | symbol == "AMZN" | symbol == "GAP" | symbol == "G.1" | symbol == "NSCN" | symbol == "NKE" | symbol == "NDAQ" | symbol == "PMI"| symbol == "ACS" | symbol == "ACV")
@@ -35,9 +79,7 @@ z <- compute_ret(y)
 
 z <- z %>%
   na.omit
-```
 
-```{r}
 w <- do_rank(z) 
 ```
 
@@ -45,9 +87,6 @@ w <- do_rank(z)
 v <- tbl_one(w)
 
 ## Table One
-```
-
-```{r}
 htmlTable(round(v, 3),
           header = c("J", "Portfolio&dagger;", "Returns", "Volume", "SzRank", "Price", "3", "6", "9", "12", "24", "36"),
           rnames = FALSE,
@@ -72,36 +111,3 @@ t <- tbl_two(w)
           tfoot = "&dagger; Portfolio 0 represents the difference between Portfolio 10 and Portfolio 1"
           )
 ```
-
-
-tbl_1_data <- select_data(v, c(3, 6, 9, 12), c(3, 6, 9, 12))
-tbl_1 <- make_table1(tbl_1_data)
-kable(tbl_1)
-# Table 2
-tbl_2_data <- select_data(z, c(3, 6, 9, 12), c(12, 24, 36))
-tbl_2 <- make_table1(tbl_2_data)
-# needs size
-kable(tbl_2)
-# Table 3
-tbl_3_data <- select_data(z, c(3, 6, 9, 12), c(3, 6, 9, 12))
-tbl_3 <- make_table2(tbl_3_data)
-kable(tbl_3)
-# Table 4
-
-
-
-# Table 5
-tbl_5_data <- select_data(z, c(3, 6, 9, 12), c(12, 24, 36))
-tbl_5 <- make_table2(tbl_5_data)
-kable(tbl_5)
-# Table 6
-tbl_6_data <- select_data(z, c(3, 6, 9, 12), c(1:48))
-tbl_6 <- make_table6(tbl_6_data)
-kable(tbl_6)
-# Needs Price and N
-
-# Table 7
-
-
-
-
