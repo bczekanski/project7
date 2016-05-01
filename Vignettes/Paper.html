@@ -71,71 +71,131 @@ img {
 <pre class="r"><code>x &lt;- get_data()
 
 y &lt;- x %&gt;%
-  filter(symbol == &quot;AAPL&quot;| symbol ==&quot;MSFT&quot;| symbol ==&quot;GOOG&quot; | symbol == &quot;FSLR&quot; | symbol == &quot;AMZN&quot; | symbol == &quot;GAP&quot; | symbol == &quot;G.1&quot; | symbol == &quot;NSCN&quot; | symbol == &quot;NKE&quot; | symbol == &quot;NDAQ&quot; | symbol == &quot;PMI&quot;| symbol == &quot;ACS&quot; | symbol == &quot;ACV&quot;)
-### UNdo this
+ filter(symbol == &quot;AAPL&quot;| symbol ==&quot;MSFT&quot;| symbol ==&quot;GOOG&quot; | symbol == &quot;FSLR&quot; | symbol == &quot;AMZN&quot; | symbol == &quot;GAP&quot; | symbol == &quot;G.1&quot; | symbol == &quot;NSCN&quot; | symbol == &quot;NKE&quot; | symbol == &quot;NDAQ&quot; | symbol == &quot;PMI&quot;| symbol == &quot;ACS&quot; | symbol == &quot;ACV&quot;)
+### UNdo this</code></pre>
+<pre class="r"><code>z &lt;- compute_ret(y)
 
-z &lt;- compute_ret(y)
+z &lt;- z %&gt;%
+  na.omit</code></pre>
+<pre class="r"><code>w &lt;- do_rank(z) </code></pre>
+<pre class="r"><code>v &lt;- tbl_one(w)
 
-
-
-w &lt;- do_rank(z)
-
-v &lt;- tbl_one(w)
-htmlTable(v)</code></pre>
-<table class="gmisc_table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">
-<tbody>
-<tr style="border-top: 2px solid grey;">
-<td style="border-top: 2px solid grey; border-bottom: 2px solid grey; text-align: center;">
+## Table One</code></pre>
+<pre class="r"><code>htmlTable(round(v, 3),
+          header = c(&quot;J&quot;, &quot;Portfolio&amp;dagger;&quot;, &quot;Returns&quot;, &quot;Volume&quot;, &quot;SzRank&quot;, &quot;Price&quot;, &quot;3&quot;, &quot;6&quot;, &quot;9&quot;, &quot;12&quot;, &quot;24&quot;, &quot;36&quot;),
+          rgroup = c(3, 6, 9, 12),
+          n.rgroup = c(4, 4, 4,4),
+          cgroup = c(&quot;&quot;, &quot;Returns per Month&quot;),
+          n.cgroup = c(6, 6),
+          tfoot = &quot;&amp;dagger; Portfolio 0 represents the difference between Portfolio 10 and Portfolio 1&quot;
+          )</code></pre>
 <table class="gmisc_table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">
 <thead>
 <tr>
-<th style="border-bottom: 1px solid grey; border-top: 2px solid grey;">
+<th style="border-top: 2px solid grey;">
 </th>
-<th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
-j.ret
+<th colspan="6" style="font-weight: 900; border-top: 2px solid grey; text-align: center;">
 </th>
-<th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
-prev.ret.rank
+<th style="border-top: 2px solid grey;; border-bottom: hidden;">
+ 
 </th>
-<th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
-prev.returns
+<th colspan="6" style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+Returns per Month
 </th>
-<th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
-prev.vol
+</tr>
+<tr>
+<th style="border-bottom: 1px solid grey;">
 </th>
-<th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
-cap.usd
+<th style="border-bottom: 1px solid grey; text-align: center;">
+J
 </th>
-<th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
-sz.rank
+<th style="border-bottom: 1px solid grey; text-align: center;">
+Portfolio†
 </th>
-<th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
-price
+<th style="border-bottom: 1px solid grey; text-align: center;">
+Returns
 </th>
-<th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+<th style="border-bottom: 1px solid grey; text-align: center;">
+Volume
+</th>
+<th style="border-bottom: 1px solid grey; text-align: center;">
+SzRank
+</th>
+<th style="border-bottom: 1px solid grey; text-align: center;">
+Price
+</th>
+<th style="border-bottom: 1px solid grey;" colspan="1">
+ 
+</th>
+<th style="border-bottom: 1px solid grey; text-align: center;">
 3
 </th>
-<th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+<th style="border-bottom: 1px solid grey; text-align: center;">
 6
 </th>
-<th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+<th style="border-bottom: 1px solid grey; text-align: center;">
 9
 </th>
-<th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+<th style="border-bottom: 1px solid grey; text-align: center;">
 12
 </th>
-<th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+<th style="border-bottom: 1px solid grey; text-align: center;">
 24
 </th>
-<th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+<th style="border-bottom: 1px solid grey; text-align: center;">
 36
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
+<td colspan="14" style="font-weight: 900;">
+3
+</td>
+</tr>
+<tr>
 <td style="text-align: left;">
-1
+  1
+</td>
+<td style="text-align: center;">
+3
+</td>
+<td style="text-align: center;">
+0
+</td>
+<td style="text-align: center;">
+</td>
+<td style="text-align: center;">
+</td>
+<td style="text-align: center;">
+</td>
+<td style="text-align: center;">
+</td>
+<td style colspan="1">
+ 
+</td>
+<td style="text-align: center;">
+4.254
+</td>
+<td style="text-align: center;">
+0.795
+</td>
+<td style="text-align: center;">
+0.923
+</td>
+<td style="text-align: center;">
+0.01
+</td>
+<td style="text-align: center;">
+-1.354
+</td>
+<td style="text-align: center;">
+0.506
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+  2
 </td>
 <td style="text-align: center;">
 3
@@ -144,42 +204,42 @@ price
 1
 </td>
 <td style="text-align: center;">
--9.07594565614253
+-6.051
 </td>
 <td style="text-align: center;">
-0.0190197388211127
+0.017
 </td>
 <td style="text-align: center;">
-11178570433.3333
+4.959
 </td>
 <td style="text-align: center;">
-5.33333333333333
+33.452
+</td>
+<td style colspan="1">
+ 
 </td>
 <td style="text-align: center;">
-24.8584495875104
+-1.117
 </td>
 <td style="text-align: center;">
--1.75008934662554
+1.867
 </td>
 <td style="text-align: center;">
-2.91967642197207
+1.159
 </td>
 <td style="text-align: center;">
-1.74804056372774
+2.102
 </td>
 <td style="text-align: center;">
-2.98693791199367
+3.029
 </td>
 <td style="text-align: center;">
-3.96355382516453
-</td>
-<td style="text-align: center;">
-3.63969906322927
+2.227
 </td>
 </tr>
 <tr>
 <td style="text-align: left;">
-2
+  3
 </td>
 <td style="text-align: center;">
 3
@@ -188,42 +248,42 @@ price
 5
 </td>
 <td style="text-align: center;">
-2.84190121270953
+2.296
 </td>
 <td style="text-align: center;">
-0.0107528550203727
+0.015
 </td>
 <td style="text-align: center;">
-56013671690
+4.982
 </td>
 <td style="text-align: center;">
-6
+62.293
+</td>
+<td style colspan="1">
+ 
 </td>
 <td style="text-align: center;">
-35.5057215225564
+0.481
 </td>
 <td style="text-align: center;">
--0.579717651968314
+0.545
 </td>
 <td style="text-align: center;">
--0.269043446140451
+-0.092
 </td>
 <td style="text-align: center;">
--2.25575715952205
+0.431
 </td>
 <td style="text-align: center;">
--1.83975712327157
+2.858
 </td>
 <td style="text-align: center;">
-0.779341860996825
-</td>
-<td style="text-align: center;">
-1.12587588764501
+2.681
 </td>
 </tr>
 <tr>
 <td style="text-align: left;">
-3
+  4
 </td>
 <td style="text-align: center;">
 3
@@ -232,42 +292,87 @@ price
 10
 </td>
 <td style="text-align: center;">
-14.4718929111004
+17.44
 </td>
 <td style="text-align: center;">
-0.0616172595454949
+0.074
 </td>
 <td style="text-align: center;">
-60586591520
+4.6
 </td>
 <td style="text-align: center;">
-8
+28.241
+</td>
+<td style colspan="1">
+ 
 </td>
 <td style="text-align: center;">
-34.61425
+3.138
 </td>
 <td style="text-align: center;">
-9.65664238371299
+2.662
 </td>
 <td style="text-align: center;">
-3.05797541501136
+2.082
 </td>
 <td style="text-align: center;">
-6.49843375528227
+2.112
 </td>
 <td style="text-align: center;">
-7.47288100502117
+1.675
 </td>
 <td style="text-align: center;">
-4.70175736205681
+2.733
 </td>
-<td style="text-align: center;">
-5.67329261326042
+</tr>
+<tr>
+<td colspan="14" style="font-weight: 900;">
+6
 </td>
 </tr>
 <tr>
 <td style="text-align: left;">
-4
+  5
+</td>
+<td style="text-align: center;">
+6
+</td>
+<td style="text-align: center;">
+0
+</td>
+<td style="text-align: center;">
+</td>
+<td style="text-align: center;">
+</td>
+<td style="text-align: center;">
+</td>
+<td style="text-align: center;">
+</td>
+<td style colspan="1">
+ 
+</td>
+<td style="text-align: center;">
+6.134
+</td>
+<td style="text-align: center;">
+2.17
+</td>
+<td style="text-align: center;">
+1.126
+</td>
+<td style="text-align: center;">
+-1.008
+</td>
+<td style="text-align: center;">
+-0.77
+</td>
+<td style="text-align: center;">
+0.292
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+  6
 </td>
 <td style="text-align: center;">
 6
@@ -276,42 +381,42 @@ price
 1
 </td>
 <td style="text-align: center;">
--5.05686063881368
+-4.017
 </td>
 <td style="text-align: center;">
-0.0223563683667491
+0.02
 </td>
 <td style="text-align: center;">
-41959304474.2857
+4.146
 </td>
 <td style="text-align: center;">
-4
+24.865
+</td>
+<td style colspan="1">
+ 
 </td>
 <td style="text-align: center;">
-19.4678003267096
+-1.207
 </td>
 <td style="text-align: center;">
--2.43596050791834
+1.023
 </td>
 <td style="text-align: center;">
-1.06549146800601
+0.91
 </td>
 <td style="text-align: center;">
-1.05229296690151
+2.498
 </td>
 <td style="text-align: center;">
-3.07422069532919
+3.202
 </td>
 <td style="text-align: center;">
-3.51620571603021
-</td>
-<td style="text-align: center;">
-2.75876039282195
+2.613
 </td>
 </tr>
 <tr>
 <td style="text-align: left;">
-5
+  7
 </td>
 <td style="text-align: center;">
 6
@@ -320,42 +425,131 @@ price
 5
 </td>
 <td style="text-align: center;">
-1.6939345854296
+1.358
 </td>
 <td style="text-align: center;">
-0.00647908792834011
+0.01
 </td>
 <td style="text-align: center;">
-17285270342
+4.87
 </td>
 <td style="text-align: center;">
-5.2
+37.609
+</td>
+<td style colspan="1">
+ 
 </td>
 <td style="text-align: center;">
-36.9412795426065
+2.167
 </td>
 <td style="text-align: center;">
-3.050983220274
+1.02
 </td>
 <td style="text-align: center;">
-0.542001829228951
+1.202
 </td>
 <td style="text-align: center;">
-1.56379078576138
+1.669
 </td>
 <td style="text-align: center;">
-1.86845020694869
+0.306
 </td>
 <td style="text-align: center;">
-1.20612485175408
-</td>
-<td style="text-align: center;">
-1.12535099754278
+0.358
 </td>
 </tr>
 <tr>
 <td style="text-align: left;">
+  8
+</td>
+<td style="text-align: center;">
 6
+</td>
+<td style="text-align: center;">
+10
+</td>
+<td style="text-align: center;">
+11.799
+</td>
+<td style="text-align: center;">
+0.054
+</td>
+<td style="text-align: center;">
+4.878
+</td>
+<td style="text-align: center;">
+34.903
+</td>
+<td style colspan="1">
+ 
+</td>
+<td style="text-align: center;">
+4.927
+</td>
+<td style="text-align: center;">
+3.193
+</td>
+<td style="text-align: center;">
+2.036
+</td>
+<td style="text-align: center;">
+1.49
+</td>
+<td style="text-align: center;">
+2.432
+</td>
+<td style="text-align: center;">
+2.905
+</td>
+</tr>
+<tr>
+<td colspan="14" style="font-weight: 900;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+  9
+</td>
+<td style="text-align: center;">
+9
+</td>
+<td style="text-align: center;">
+0
+</td>
+<td style="text-align: center;">
+</td>
+<td style="text-align: center;">
+</td>
+<td style="text-align: center;">
+</td>
+<td style="text-align: center;">
+</td>
+<td style colspan="1">
+ 
+</td>
+<td style="text-align: center;">
+5.241
+</td>
+<td style="text-align: center;">
+0.363
+</td>
+<td style="text-align: center;">
+0.954
+</td>
+<td style="text-align: center;">
+-1.04
+</td>
+<td style="text-align: center;">
+-1.395
+</td>
+<td style="text-align: center;">
+2.039
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+  10
 </td>
 <td style="text-align: center;">
 9
@@ -364,42 +558,42 @@ price
 1
 </td>
 <td style="text-align: center;">
--6.60436682507132
+-4.235
 </td>
 <td style="text-align: center;">
-0.0189158013513511
+0.015
 </td>
 <td style="text-align: center;">
-49358667005.4167
+5.298
 </td>
 <td style="text-align: center;">
-4.66666666666667
+29.157
+</td>
+<td style colspan="1">
+ 
 </td>
 <td style="text-align: center;">
-23.0750453216374
+-2.96
 </td>
 <td style="text-align: center;">
--4.86510603846434
+1.833
 </td>
 <td style="text-align: center;">
-1.96428468330709
+-0.077
 </td>
 <td style="text-align: center;">
--0.443328501373652
+1.964
 </td>
 <td style="text-align: center;">
-2.63052239223315
+2.49
 </td>
 <td style="text-align: center;">
-3.04741660818858
-</td>
-<td style="text-align: center;">
-2.68987585496833
+-0.801
 </td>
 </tr>
 <tr>
 <td style="text-align: left;">
-7
+  11
 </td>
 <td style="text-align: center;">
 9
@@ -408,42 +602,131 @@ price
 5
 </td>
 <td style="text-align: center;">
-0.944797288356853
+1.128
 </td>
 <td style="text-align: center;">
-0.00290167783414069
+0.007
 </td>
 <td style="text-align: center;">
-14800054947.5
+5.34
 </td>
 <td style="text-align: center;">
-4.8
+37.25
+</td>
+<td style colspan="1">
+ 
 </td>
 <td style="text-align: center;">
-32.9883317042607
+-0.556
 </td>
 <td style="text-align: center;">
--1.17608083430334
+2.144
 </td>
 <td style="text-align: center;">
-1.25855337626492
+1.467
 </td>
 <td style="text-align: center;">
-0.284960915851221
+2.166
 </td>
 <td style="text-align: center;">
-1.93155282614576
+2.118
 </td>
 <td style="text-align: center;">
--0.630783070110252
-</td>
-<td style="text-align: center;">
-0.829444403744928
+1.304
 </td>
 </tr>
 <tr>
 <td style="text-align: left;">
-8
+  12
+</td>
+<td style="text-align: center;">
+9
+</td>
+<td style="text-align: center;">
+10
+</td>
+<td style="text-align: center;">
+12.181
+</td>
+<td style="text-align: center;">
+0.045
+</td>
+<td style="text-align: center;">
+5.694
+</td>
+<td style="text-align: center;">
+36.011
+</td>
+<td style colspan="1">
+ 
+</td>
+<td style="text-align: center;">
+2.281
+</td>
+<td style="text-align: center;">
+2.196
+</td>
+<td style="text-align: center;">
+0.877
+</td>
+<td style="text-align: center;">
+0.924
+</td>
+<td style="text-align: center;">
+1.096
+</td>
+<td style="text-align: center;">
+1.239
+</td>
+</tr>
+<tr>
+<td colspan="14" style="font-weight: 900;">
+12
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+  13
+</td>
+<td style="text-align: center;">
+12
+</td>
+<td style="text-align: center;">
+0
+</td>
+<td style="text-align: center;">
+</td>
+<td style="text-align: center;">
+</td>
+<td style="text-align: center;">
+</td>
+<td style="text-align: center;">
+</td>
+<td style colspan="1">
+ 
+</td>
+<td style="text-align: center;">
+6.736
+</td>
+<td style="text-align: center;">
+0.906
+</td>
+<td style="text-align: center;">
+0.486
+</td>
+<td style="text-align: center;">
+-0.92
+</td>
+<td style="text-align: center;">
+-1.294
+</td>
+<td style="text-align: center;">
+-0.742
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+  14
 </td>
 <td style="text-align: center;">
 12
@@ -452,93 +735,140 @@ price
 1
 </td>
 <td style="text-align: center;">
--4.53224497271998
+-3.739
 </td>
 <td style="text-align: center;">
-0.0115146323178323
+0.011
 </td>
 <td style="text-align: center;">
-14343997572.1429
+4.851
 </td>
 <td style="text-align: center;">
-4.85714285714286
+33.526
+</td>
+<td style colspan="1">
+ 
 </td>
 <td style="text-align: center;">
-28.7972896974579
+-1.735
 </td>
 <td style="text-align: center;">
--3.02714981639873
+2.202
 </td>
 <td style="text-align: center;">
-2.27875209190969
+1.424
 </td>
 <td style="text-align: center;">
-1.58428675010913
+2.372
 </td>
 <td style="text-align: center;">
-2.89357441480948
+1.905
 </td>
 <td style="text-align: center;">
-1.91901205870298
+1.463
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+  15
 </td>
 <td style="text-align: center;">
-2.34763688809492
+12
+</td>
+<td style="text-align: center;">
+5
+</td>
+<td style="text-align: center;">
+0.697
+</td>
+<td style="text-align: center;">
+0.008
+</td>
+<td style="text-align: center;">
+5.358
+</td>
+<td style="text-align: center;">
+31.799
+</td>
+<td style colspan="1">
+ 
+</td>
+<td style="text-align: center;">
+0.707
+</td>
+<td style="text-align: center;">
+1.408
+</td>
+<td style="text-align: center;">
+0.911
+</td>
+<td style="text-align: center;">
+2.859
+</td>
+<td style="text-align: center;">
+1.747
+</td>
+<td style="text-align: center;">
+1.448
 </td>
 </tr>
 <tr>
 <td style="border-bottom: 2px solid grey; text-align: left;">
-9
+  16
 </td>
 <td style="border-bottom: 2px solid grey; text-align: center;">
 12
 </td>
 <td style="border-bottom: 2px solid grey; text-align: center;">
-5
+10
 </td>
 <td style="border-bottom: 2px solid grey; text-align: center;">
-1.01795258669326
+10.773
 </td>
 <td style="border-bottom: 2px solid grey; text-align: center;">
-0.00747963076846935
+0.039
 </td>
 <td style="border-bottom: 2px solid grey; text-align: center;">
-18912285536.5
+5.51
 </td>
 <td style="border-bottom: 2px solid grey; text-align: center;">
-5.6
+35.501
+</td>
+<td style="border-bottom: 2px solid grey;" colspan="1">
+ 
 </td>
 <td style="border-bottom: 2px solid grey; text-align: center;">
-30.5840539473684
+5.001
 </td>
 <td style="border-bottom: 2px solid grey; text-align: center;">
-3.45181080313111
+3.109
 </td>
 <td style="border-bottom: 2px solid grey; text-align: center;">
-2.74703607118846
+1.911
 </td>
 <td style="border-bottom: 2px solid grey; text-align: center;">
-1.75406150206416
+1.453
 </td>
 <td style="border-bottom: 2px solid grey; text-align: center;">
-4.11469707308119
+0.612
 </td>
 <td style="border-bottom: 2px solid grey; text-align: center;">
-2.22621909711881
-</td>
-<td style="border-bottom: 2px solid grey; text-align: center;">
-1.86105343981018
+0.721
 </td>
 </tr>
 </tbody>
-</table>
+<tfoot>
+<tr>
+<td colspan="14">
+† Portfolio 0 represents the difference between Portfolio 10 and Portfolio 1
 </td>
 </tr>
-</tbody>
+</tfoot>
 </table>
 <pre><code>htmlTable(t,
           rgroup = c(3, 6, 9, 12),
-          n.rgroup = c(4, 4, 4, 4)
-          
+          n.rgroup = c(4, 4, 4, 4),
+          cgroup = rbind(c(&quot;first&quot;, &quot;second&quot;, NA), c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;))
           )</code></pre>
 <p>```</p>
 <p>tbl_1_data &lt;- select_data(v, c(3, 6, 9, 12), c(3, 6, 9, 12)) tbl_1 &lt;- make_table1(tbl_1_data) kable(tbl_1) # Table 2 tbl_2_data &lt;- select_data(z, c(3, 6, 9, 12), c(12, 24, 36)) tbl_2 &lt;- make_table1(tbl_2_data) # needs size kable(tbl_2) # Table 3 tbl_3_data &lt;- select_data(z, c(3, 6, 9, 12), c(3, 6, 9, 12)) tbl_3 &lt;- make_table2(tbl_3_data) kable(tbl_3) # Table 4</p>
