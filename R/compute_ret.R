@@ -1,4 +1,5 @@
 compute_ret <- function(y) {
+
   prior_returns <- function(y, months){
     y %>%
       group_by(symbol) %>%
@@ -22,6 +23,10 @@ compute_ret <- function(y) {
     gather(key = j.vol, value = prev.vol, 9:ncol(y))
   y$j.vol  <- extract_numeric(y$j.vol)
 
+  y <- y %>%
+    filter(j.ret == j.vol)
+
+
   prior_returns3 <- function(y, months){
     y %>%
       group_by(symbol) %>%
@@ -39,6 +44,7 @@ compute_ret <- function(y) {
 
   z <- y %>%
     mutate(month = month(monthYear)) %>%
-    filter(j.ret == j.vol, month == 1)
+    filter(month == 1) %>%
+    na.omit
 
 }
