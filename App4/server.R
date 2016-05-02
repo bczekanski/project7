@@ -12,7 +12,10 @@ shinyServer(function(input, output) {
       geom_smooth (method = lm) #+
       #scale_x_log10() +
       #scale_y_log10()
+      #lock scales
+      # filter by cap, price, sector
   # Display the slope???
+    # shinyAppDir("App4")
     })
 
 })
