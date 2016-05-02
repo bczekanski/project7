@@ -8,8 +8,11 @@ shinyServer(function(input, output) {
     t %>%
     ggplot(aes(prev.returns, future.returns)) +
       geom_point (aes(color = prev.vol)) +
-      scale_colour_gradientn(colours=c("#372EFF","#F9FF2E","#FD3206")) +
-      geom_smooth (method = lm)
-  })
+      scale_colour_gradientn(colours=c("#372EFF","#F9FF2E","#FD3206"), trans = "log") +
+      geom_smooth (method = lm) #+
+      #scale_x_log10() +
+      #scale_y_log10()
+  # Display the slope???
+    })
 
 })

@@ -14,7 +14,7 @@ library(zoo)
   prior_returns2 <- function(y, months){
     y %>%
       group_by(symbol) %>%
-      mutate(mean_TV = roll_mean( (monthly_returns), months, fill = NA, align = "right")) %>%
+      mutate(mean_TV = roll_mean((monthly_TV), months, fill = NA, align = "right")) %>%
       rename(c(mean_TV = paste0(months, "_month_prior_volume")))
   }
 
@@ -30,7 +30,7 @@ library(zoo)
   prior_returns3 <- function(y, months){
     y %>%
       group_by(symbol) %>%
-      mutate(returns2 = roll_mean((monthly_returns), months, fill = NA, align = "left")) %>%
+      mutate(returns2 = roll_mean(lead(monthly_returns), months, fill = NA, align = "left")) %>%
       rename(c(returns2 = paste0(months, "_month_future_returns")))
   }
 
@@ -46,7 +46,7 @@ library(zoo)
     mutate(month = month(monthYear)) %>%
     filter(month == 1) %>%
     group_by(symbol) %>%
-    filter(monthly_returns <= 500, prev.returns <= 200, price >= 1, nchar(symbol) <= 3) %>%
+    #filter(monthly_returns <= 50) %>%
     na.omit
 
 }
