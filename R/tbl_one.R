@@ -13,10 +13,10 @@ tbl_one <- function(w){
     group_by(j.ret, k.ret, prev.ret.rank) %>%
     summarize(future.returns = mean(future.returns)) %>%
     spread(key = prev.ret.rank, value = future.returns) %>%
-    mutate(`0` = `10` - `1`) %>%
+    mutate(`11` = `10` - `1`) %>%
     #select(j.ret, k.ret, diff) %>%
     group_by(j.ret, k.ret) %>%
-    gather(key = prev.ret.rank, value = future.returns, `0`, `1`, `5`, `10`) %>%
+    gather(key = prev.ret.rank, value = future.returns, `11`, `1`, `5`, `10`) %>%
     mutate(prev.ret.rank  = as.integer(prev.ret.rank))
   d <- v %>%
     group_by(j.ret, k.ret, prev.ret.rank) %>%

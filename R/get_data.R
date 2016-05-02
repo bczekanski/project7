@@ -33,7 +33,8 @@ get_data <- function () {
   all_ws.data <- left_join(daily_yearly, secref, by = c("id", "symbol"))
 
   cleaned_data <- all_ws.data %>%
-    filter(m.ind != "REITS")
+    group_by(symbol) %>%
+    filter(m.ind != "REITS", tret <= 20)
   # Need to filter out the stocks with mins less than $1
   # in order to be fair, must do it w knowledge at the time
   # put filter in later

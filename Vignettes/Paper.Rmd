@@ -23,20 +23,18 @@ library(htmlTable)
 ```
 
 ```{r}
-#x <- get_data()
-
-
-#y <- x #%>%
+x <- get_data()
+#x -> x
+#z -> z 
+y <- x 
+#%>%
  #filter(symbol == "AAPL"| symbol =="MSFT"| symbol =="GOOG" | symbol == "FSLR" | symbol == "AMZN" | symbol == "GAP" | symbol == "G.1" | symbol == "NSCN" | symbol == "NKE" | symbol == "NDAQ" | symbol == "PMI"| symbol == "ACS" | symbol == "ACV")
 ### UNdo this
 ```
 
 ```{r}
-
-#z <- compute_ret(y)
-
-z <- z %>%
-  na.omit
+#head(z)
+z <- compute_ret(y)
 
 w <- do_rank(z) 
 ```

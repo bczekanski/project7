@@ -1,9 +1,9 @@
 compute_ret <- function(y) {
-
+library(zoo)
   prior_returns <- function(y, months){
     y %>%
       group_by(symbol) %>%
-      mutate(returns = roll_mean(monthly_returns, months, fill = NA, align = "right")) %>%
+      mutate(returns = roll_mean((monthly_returns), months, fill = NA, align = "right")) %>%
       rename(c(returns = paste0(months, "_month_prior_returns")))
   }
   for(i in c(1, 2, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36)) {prior_returns(y, i) -> y}
@@ -14,7 +14,7 @@ compute_ret <- function(y) {
   prior_returns2 <- function(y, months){
     y %>%
       group_by(symbol) %>%
-      mutate(mean_TV = roll_mean(monthly_TV, months, fill = NA, align = "right")) %>%
+      mutate(mean_TV = roll_mean( (monthly_returns), months, fill = NA, align = "right")) %>%
       rename(c(mean_TV = paste0(months, "_month_prior_volume")))
   }
 
@@ -30,7 +30,7 @@ compute_ret <- function(y) {
   prior_returns3 <- function(y, months){
     y %>%
       group_by(symbol) %>%
-      mutate(returns2 = roll_mean(monthly_returns, months, fill = NA, align = "left")) %>%
+      mutate(returns2 = roll_mean((monthly_returns), months, fill = NA, align = "left")) %>%
       rename(c(returns2 = paste0(months, "_month_future_returns")))
   }
 
@@ -45,6 +45,8 @@ compute_ret <- function(y) {
   z <- y %>%
     mutate(month = month(monthYear)) %>%
     filter(month == 1) %>%
+    group_by(symbol) %>%
+    filter(monthly_returns <= 500, prev.returns <= 200, price >= 1, nchar(symbol) <= 3) %>%
     na.omit
 
 }
