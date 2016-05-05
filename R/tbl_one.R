@@ -1,6 +1,5 @@
 tbl_one <- function(w){
 
-  library(htmlTable)
   v <- select_data(w, c(3, 6, 9, 12), c(3, 6, 9, 12, 24, 36, 48, 60)) %>%
     group_by(j.ret, prev.ret.rank) %>%
     mutate_each(funs(mean), prev.returns, prev.vol, sz.rank, price) %>%
@@ -18,9 +17,11 @@ tbl_one <- function(w){
     group_by(j.ret, k.ret) %>%
     gather(key = prev.ret.rank, value = future.returns, `11`, `1`, `5`, `10`) %>%
     mutate(prev.ret.rank  = as.integer(prev.ret.rank))
+
   d <- v %>%
     group_by(j.ret, k.ret, prev.ret.rank) %>%
     summarize_each(funs(mean), prev.returns, prev.vol, sz.rank, price, future.returns)
+
   r <- left_join(s,d, by = c("j.ret", "k.ret", "prev.ret.rank", "future.returns"))
   # Spread ret rank out and calc diff then gather it back
 

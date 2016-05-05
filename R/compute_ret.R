@@ -6,6 +6,7 @@ library(zoo)
       mutate(returns = roll_mean((monthly_returns), months, fill = NA, align = "right")) %>%
       rename(c(returns = paste0(months, "_month_prior_returns")))
   }
+
   for(i in c(1, 2, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36)) {prior_returns(y, i) -> y}
   y <- y%>%
     gather(key = j.ret, value = prev.returns, 7:ncol(y))
@@ -30,7 +31,7 @@ library(zoo)
   prior_returns3 <- function(y, months){
     y %>%
       group_by(symbol) %>%
-      mutate(returns2 = roll_mean(lead(monthly_returns), months, fill = NA, align = "left")) %>%
+      mutate(returns2 = roll_mean(lead(monthly_returns, n = 1), months, fill = NA, align = "left")) %>%
       rename(c(returns2 = paste0(months, "_month_future_returns")))
   }
 
@@ -45,8 +46,8 @@ library(zoo)
   z <- y %>%
     mutate(month = month(monthYear)) %>%
     filter(month == 1) %>%
-    group_by(symbol) %>%
-    #filter(monthly_returns <= 50) %>%
+    #group_by(symbol) %>%
+    #filter(monthly_returns <= 200) %>%
     na.omit
 
 }

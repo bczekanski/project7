@@ -1,25 +1,31 @@
+library(project7)
+library(shiny)
 shinyUI(fluidPage(
 
-  titlePanel("Conditional panels"),
+  titlePanel("Filtering Options"),
 
-  column(2, wellPanel(
-    sliderInput("m", "Previous Period",
-                min = 3, max = 36, value = 3, step = 3)
-  )),
+  sidebarLayout(
+    sidebarPanel(
 
-  column(2, wellPanel(
-    sliderInput("n", "Future Period",
-                min = 3, max = 36, value = 3, step = 3)
-  )),
+    sliderInput("m", "Previous Period (Months)",
+                min = 3, max = 36, value = 3, step = 3),
 
-  column(5,
-         "Words Here",
+    sliderInput("n", "Future Period (Months)",
+                min = 3, max = 36, value = 3, step = 3),
 
-         # With the conditionalPanel, the condition is a JavaScript
-         # expression. In these expressions, input values like
-         # input$n are accessed with dots, as in input.n
-         conditionalPanel("input.n >= 0",
-                          plotOutput("scatterPlot", height = 800, width = 800)
-         )
-  )
+    sliderInput("range", "Price Range:",
+                min = 1, max = 10000, value = c(0,10000)),
+
+    sliderInput("size", "Market Cap Range:",
+                min = 1, max = 10000000000, value = c(0,10000000000)),
+
+    selectInput(
+      "e0", "Ticker", choices = c("All", uniques), multiple = TRUE, selectize = TRUE)
+    ),
+
+
+    mainPanel(plotOutput("scatterPlot", height = 700, width = 1000)
+               )
+        )
 ))
+

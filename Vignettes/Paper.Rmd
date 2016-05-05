@@ -28,15 +28,18 @@ x <- get_data()
 #z -> z 
 y <- x 
 #%>%
- #filter(symbol == "AAPL"| symbol =="MSFT"| symbol =="GOOG" | symbol == "FSLR" | symbol == "AMZN" | symbol == "GAP" | symbol == "G.1" | symbol == "NSCN" | symbol == "NKE" | symbol == "NDAQ" | symbol == "PMI"| symbol == "ACS" | symbol == "ACV")
-### UNdo this
+
+#library(devtools)
+#use_data(x, overwrite = TRUE)
+
 ```
 
 ```{r}
 #head(z)
 z <- compute_ret(y)
-
+#use_data(z, overwrite = TRUE)
 w <- do_rank(z) 
+#use_data(w, overwrite  = TRUE)
 ```
 
 ```{r}
