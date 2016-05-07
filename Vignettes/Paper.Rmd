@@ -70,3 +70,12 @@ t <- tbl_two(w)
           tfoot = "&dagger; Portfolio 0 represents the difference between Portfolio 10 and Portfolio 1"
           )
 ```
+
+```{r}
+r <- left_join(w, secref, by  = "symbol") %>%
+  select(- id)
+unique.tickers <- unique(r$symbol)
+unique.sectors <- unique(r$m.sec)
+unique.industries <- unique(r$m.ind)
+```
+

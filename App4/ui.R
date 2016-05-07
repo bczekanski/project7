@@ -19,8 +19,20 @@ shinyUI(fluidPage(
     sliderInput("size", "Market Cap Range:",
                 min = 1, max = 10000000000, value = c(0,10000000000)),
 
+    sliderInput("volume", "Volume Range:",
+                min = 0, max = .5, value = c(0,.5)),
+
     selectInput(
-      "e0", "Ticker", choices = c("All", uniques), multiple = TRUE, selectize = TRUE)
+      "ticker", "Ticker", choices = c("All", unique.tickers), multiple = TRUE, selectize = TRUE)
+    ,
+
+    selectInput(
+      "sector", "Sector", choices = c("All", unique.sectors), multiple = TRUE, selectize = TRUE)
+  ,
+
+  selectInput(
+    "industry", "Industry", choices = c("All", unique.industries), multiple = TRUE, selectize = TRUE)
+
     ),
 
 
