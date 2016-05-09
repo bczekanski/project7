@@ -27,7 +27,7 @@ x <- get_data()
 #x -> x
 #z -> z 
 y <- x 
-#%>%
+
 
 #library(devtools)
 #use_data(x, overwrite = TRUE)
@@ -36,9 +36,15 @@ y <- x
 
 ```{r}
 #head(z)
-z <- compute_ret(y)
+one <- comp_ret1(y)
+two <- comp_ret2(y)
+three <- comp_ret3(one, two)
+
+
+
+#z <- compute_ret(y)
 #use_data(z, overwrite = TRUE)
-w <- do_rank(z) 
+w <- do_rank(three) 
 #use_data(w, overwrite  = TRUE)
 ```
 
@@ -72,7 +78,7 @@ t <- tbl_two(w)
 ```
 
 ```{r}
-r <- left_join(w, secref, by  = "symbol") %>%
+r <- left_join(w, secref, by = "symbol") %>%
   select(- id)
 unique.tickers <- unique(r$symbol)
 unique.sectors <- unique(r$m.sec)

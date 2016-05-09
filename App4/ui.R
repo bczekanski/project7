@@ -13,14 +13,17 @@ shinyUI(fluidPage(
     sliderInput("n", "Future Period (Months)",
                 min = 3, max = 36, value = 3, step = 3),
 
+    sliderInput("prev.vol.rank", "previous  vol rank",
+                min = 1, max = 3, value = 2),
+
     sliderInput("range", "Price Range:",
-                min = 1, max = 10000, value = c(0,10000)),
+                min = 1, max = 100000, value = c(0,100000)),
 
     sliderInput("size", "Market Cap Range:",
-                min = 1, max = 10000000000, value = c(0,10000000000)),
+                min = 1, max = 100000000000, value = c(0,1000000000000)),
 
     sliderInput("volume", "Volume Range:",
-                min = 0, max = .5, value = c(0,.5)),
+                min = 0.0000, max = 3, value = c(0, 3)),
 
     selectInput(
       "ticker", "Ticker", choices = c("All", unique.tickers), multiple = TRUE, selectize = TRUE)
@@ -36,7 +39,7 @@ shinyUI(fluidPage(
     ),
 
 
-    mainPanel(plotOutput("scatterPlot", height = 700, width = 1000)
+    mainPanel(plotOutput("scatterPlot", height = 500, width = 800)
                )
         )
 ))

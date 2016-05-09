@@ -33,7 +33,8 @@ get_data <- function () {
 
   cleaned_data <- all_ws.data %>%
     group_by(symbol) %>%
-    filter(m.ind != "REITS", tret <= .3)
+    filter(m.ind != "REITS", tret <= .2)
+
   # Need to filter out the stocks with mins less than $1
   # in order to be fair, must do it w knowledge at the time
   # put filter in later
@@ -54,6 +55,6 @@ get_data <- function () {
   x <- left_join(monthly_TV1, monthly_returns1, by = c("symbol", "monthYear")) %>%
     #mutate(month = month(monthYear)) %>%
     group_by(symbol) %>%
-    filter(price >= 1, nchr(symbol) <= 3) %>%
+    filter(price >= 1 , monthly_TV <= 1)  %>%
     tbl_df()
 }
