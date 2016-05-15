@@ -68,7 +68,7 @@ img {
 </div>
 
 
-<pre class="r"><code>x &lt;- get_data()
+<pre class="r"><code>#x &lt;- get_data()
 #x -&gt; x
 #z -&gt; z 
 y &lt;- x 
@@ -76,16 +76,14 @@ y &lt;- x
 
 #library(devtools)
 #use_data(x, overwrite = TRUE)</code></pre>
-<pre class="r"><code>#head(z)
-# one &lt;- comp_ret1(y)
-# two &lt;- comp_ret2(y)
-# three &lt;- comp_ret3(one, two)
-
-
-
-z &lt;- compute_ret(y)
+<pre class="r"><code>#z -&gt; z
+ one &lt;- comp_ret1(y)
+ two &lt;- comp_ret2(y)
+ three &lt;- comp_ret3(one, two)
+z &lt;- three
+#z &lt;- compute_ret(y)
 #use_data(z, overwrite = TRUE)
-w &lt;- do_rank(z) 
+w &lt;- do_rank(z, 10, 3, 10) 
 #use_data(w, overwrite  = TRUE)</code></pre>
 <pre class="r"><code>v &lt;- tbl_one(w)
 
@@ -167,37 +165,37 @@ Price
 1
 </td>
 <td style="text-align: center;">
--11.673
+-12.536
 </td>
 <td style="text-align: center;">
-0.021
+0.017
 </td>
 <td style="text-align: center;">
-5.438
+5.442
 </td>
 <td style="text-align: center;">
-36.453
+35.063
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
--3.358
+-2.44
 </td>
 <td style="text-align: center;">
--2.745
+-1.283
 </td>
 <td style="text-align: center;">
--2.39
+-1.949
 </td>
 <td style="text-align: center;">
--1.404
+-0.795
 </td>
 <td style="text-align: center;">
--0.965
+-0.334
 </td>
 <td style="text-align: center;">
--0.792
+0.124
 </td>
 </tr>
 <tr>
@@ -208,202 +206,202 @@ Price
 5
 </td>
 <td style="text-align: center;">
-1.527
-</td>
-<td style="text-align: center;">
-0.009
-</td>
-<td style="text-align: center;">
-5.442
-</td>
-<td style="text-align: center;">
-142.095
-</td>
-<td style colspan="1">
- 
-</td>
-<td style="text-align: center;">
-1.033
-</td>
-<td style="text-align: center;">
-0.793
-</td>
-<td style="text-align: center;">
-0.618
-</td>
-<td style="text-align: center;">
-0.858
-</td>
-<td style="text-align: center;">
-0.845
-</td>
-<td style="text-align: center;">
-0.848
-</td>
-</tr>
-<tr>
-<td style="text-align: center;">
-3
-</td>
-<td style="text-align: center;">
-10
-</td>
-<td style="text-align: center;">
-17.203
-</td>
-<td style="text-align: center;">
-0.021
-</td>
-<td style="text-align: center;">
-5.442
-</td>
-<td style="text-align: center;">
-86.281
-</td>
-<td style colspan="1">
- 
-</td>
-<td style="text-align: center;">
-0.147
-</td>
-<td style="text-align: center;">
-0.542
-</td>
-<td style="text-align: center;">
-0.711
-</td>
-<td style="text-align: center;">
-1.081
-</td>
-<td style="text-align: center;">
-0.457
-</td>
-<td style="text-align: center;">
-0.182
-</td>
-</tr>
-<tr>
-<td style="text-align: center;">
-3
-</td>
-<td style="text-align: center;">
-11
-</td>
-<td style="text-align: center;">
-</td>
-<td style="text-align: center;">
-</td>
-<td style="text-align: center;">
-</td>
-<td style="text-align: center;">
-</td>
-<td style colspan="1">
- 
-</td>
-<td style="text-align: center;">
-3.504
-</td>
-<td style="text-align: center;">
-3.287
-</td>
-<td style="text-align: center;">
-3.1
-</td>
-<td style="text-align: center;">
-2.485
-</td>
-<td style="text-align: center;">
-1.422
-</td>
-<td style="text-align: center;">
-0.974
-</td>
-</tr>
-<tr>
-<td colspan="13" style="font-weight: 900;">
-6
-</td>
-</tr>
-<tr>
-<td style="text-align: center;">
-6
-</td>
-<td style="text-align: center;">
-1
-</td>
-<td style="text-align: center;">
--10.112
-</td>
-<td style="text-align: center;">
-0.019
-</td>
-<td style="text-align: center;">
-5.452
-</td>
-<td style="text-align: center;">
-54.937
-</td>
-<td style colspan="1">
- 
-</td>
-<td style="text-align: center;">
--3.668
-</td>
-<td style="text-align: center;">
--2.937
-</td>
-<td style="text-align: center;">
--2.404
-</td>
-<td style="text-align: center;">
--1.336
-</td>
-<td style="text-align: center;">
--1.252
-</td>
-<td style="text-align: center;">
--1.129
-</td>
-</tr>
-<tr>
-<td style="text-align: center;">
-6
-</td>
-<td style="text-align: center;">
-5
-</td>
-<td style="text-align: center;">
-0.782
+2.404
 </td>
 <td style="text-align: center;">
 0.008
 </td>
 <td style="text-align: center;">
-5.453
+5.441
 </td>
 <td style="text-align: center;">
-34.382
+119.49
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
-0.993
+0.39
 </td>
 <td style="text-align: center;">
-0.7
+0.865
 </td>
 <td style="text-align: center;">
-0.681
+0.209
 </td>
 <td style="text-align: center;">
-0.934
+0.784
 </td>
 <td style="text-align: center;">
-0.915
+0.94
 </td>
 <td style="text-align: center;">
-0.91
+1.06
+</td>
+</tr>
+<tr>
+<td style="text-align: center;">
+3
+</td>
+<td style="text-align: center;">
+10
+</td>
+<td style="text-align: center;">
+19.408
+</td>
+<td style="text-align: center;">
+0.018
+</td>
+<td style="text-align: center;">
+5.441
+</td>
+<td style="text-align: center;">
+99.241
+</td>
+<td style colspan="1">
+ 
+</td>
+<td style="text-align: center;">
+0.362
+</td>
+<td style="text-align: center;">
+0.58
+</td>
+<td style="text-align: center;">
+-0.146
+</td>
+<td style="text-align: center;">
+0.272
+</td>
+<td style="text-align: center;">
+0.327
+</td>
+<td style="text-align: center;">
+0.128
+</td>
+</tr>
+<tr>
+<td style="text-align: center;">
+3
+</td>
+<td style="text-align: center;">
+11
+</td>
+<td style="text-align: center;">
+</td>
+<td style="text-align: center;">
+</td>
+<td style="text-align: center;">
+</td>
+<td style="text-align: center;">
+</td>
+<td style colspan="1">
+ 
+</td>
+<td style="text-align: center;">
+2.802
+</td>
+<td style="text-align: center;">
+1.863
+</td>
+<td style="text-align: center;">
+1.803
+</td>
+<td style="text-align: center;">
+1.067
+</td>
+<td style="text-align: center;">
+0.661
+</td>
+<td style="text-align: center;">
+0.004
+</td>
+</tr>
+<tr>
+<td colspan="13" style="font-weight: 900;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align: center;">
+6
+</td>
+<td style="text-align: center;">
+1
+</td>
+<td style="text-align: center;">
+-11.417
+</td>
+<td style="text-align: center;">
+0.018
+</td>
+<td style="text-align: center;">
+5.441
+</td>
+<td style="text-align: center;">
+43.82
+</td>
+<td style colspan="1">
+ 
+</td>
+<td style="text-align: center;">
+-3.025
+</td>
+<td style="text-align: center;">
+-1.907
+</td>
+<td style="text-align: center;">
+-2.217
+</td>
+<td style="text-align: center;">
+-0.92
+</td>
+<td style="text-align: center;">
+-0.259
+</td>
+<td style="text-align: center;">
+0.166
+</td>
+</tr>
+<tr>
+<td style="text-align: center;">
+6
+</td>
+<td style="text-align: center;">
+5
+</td>
+<td style="text-align: center;">
+0.32
+</td>
+<td style="text-align: center;">
+0.008
+</td>
+<td style="text-align: center;">
+5.441
+</td>
+<td style="text-align: center;">
+76.81
+</td>
+<td style colspan="1">
+ 
+</td>
+<td style="text-align: center;">
+0.172
+</td>
+<td style="text-align: center;">
+0.909
+</td>
+<td style="text-align: center;">
+0.266
+</td>
+<td style="text-align: center;">
+0.807
+</td>
+<td style="text-align: center;">
+0.975
+</td>
+<td style="text-align: center;">
+1.002
 </td>
 </tr>
 <tr>
@@ -414,37 +412,37 @@ Price
 10
 </td>
 <td style="text-align: center;">
-11.175
+10.711
 </td>
 <td style="text-align: center;">
-0.018
+0.017
 </td>
 <td style="text-align: center;">
-5.453
+5.441
 </td>
 <td style="text-align: center;">
-84.281
+60.108
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
-0.125
+1.661
 </td>
 <td style="text-align: center;">
-0.557
+1.559
 </td>
 <td style="text-align: center;">
-0.624
+0.653
 </td>
 <td style="text-align: center;">
-0.882
+0.9
 </td>
 <td style="text-align: center;">
-0.565
+0.756
 </td>
 <td style="text-align: center;">
-0.33
+0.458
 </td>
 </tr>
 <tr>
@@ -466,22 +464,22 @@ Price
  
 </td>
 <td style="text-align: center;">
-3.794
+4.686
 </td>
 <td style="text-align: center;">
-3.494
+3.466
 </td>
 <td style="text-align: center;">
-3.028
+2.871
 </td>
 <td style="text-align: center;">
-2.218
+1.82
 </td>
 <td style="text-align: center;">
-1.817
+1.015
 </td>
 <td style="text-align: center;">
-1.458
+0.292
 </td>
 </tr>
 <tr>
@@ -497,37 +495,37 @@ Price
 1
 </td>
 <td style="text-align: center;">
--9.182
+-9.764
 </td>
 <td style="text-align: center;">
 0.02
 </td>
 <td style="text-align: center;">
-5.437
+5.439
 </td>
 <td style="text-align: center;">
-27.817
+31.495
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
--3.618
+-3.173
 </td>
 <td style="text-align: center;">
--2.81
+-2.052
 </td>
 <td style="text-align: center;">
--2.366
+-2.332
 </td>
 <td style="text-align: center;">
--1.304
+-1.036
 </td>
 <td style="text-align: center;">
--1.188
+-0.349
 </td>
 <td style="text-align: center;">
--1.138
+0.062
 </td>
 </tr>
 <tr>
@@ -538,7 +536,7 @@ Price
 5
 </td>
 <td style="text-align: center;">
-0.512
+0.647
 </td>
 <td style="text-align: center;">
 0.008
@@ -547,28 +545,28 @@ Price
 5.439
 </td>
 <td style="text-align: center;">
-33.133
+34.807
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
-0.575
+0.55
 </td>
 <td style="text-align: center;">
-0.555
+1.17
 </td>
 <td style="text-align: center;">
-0.503
+0.461
 </td>
 <td style="text-align: center;">
-0.781
+0.993
 </td>
 <td style="text-align: center;">
-0.89
+1.02
 </td>
 <td style="text-align: center;">
-0.877
+1.059
 </td>
 </tr>
 <tr>
@@ -579,37 +577,37 @@ Price
 10
 </td>
 <td style="text-align: center;">
-9.051
+9.308
 </td>
 <td style="text-align: center;">
-0.017
+0.016
 </td>
 <td style="text-align: center;">
-5.44
+5.439
 </td>
 <td style="text-align: center;">
-54.257
+55.823
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
-0.491
+1.913
 </td>
 <td style="text-align: center;">
-0.585
+1.339
 </td>
 <td style="text-align: center;">
-0.709
+0.604
 </td>
 <td style="text-align: center;">
-0.841
+0.878
 </td>
 <td style="text-align: center;">
-0.687
+0.78
 </td>
 <td style="text-align: center;">
-0.497
+0.58
 </td>
 </tr>
 <tr>
@@ -631,22 +629,22 @@ Price
  
 </td>
 <td style="text-align: center;">
-4.108
+5.086
 </td>
 <td style="text-align: center;">
-3.395
+3.391
 </td>
 <td style="text-align: center;">
-3.076
+2.935
 </td>
 <td style="text-align: center;">
-2.146
+1.914
 </td>
 <td style="text-align: center;">
-1.875
+1.129
 </td>
 <td style="text-align: center;">
-1.635
+0.518
 </td>
 </tr>
 <tr>
@@ -662,37 +660,37 @@ Price
 1
 </td>
 <td style="text-align: center;">
--8.729
+-8.801
 </td>
 <td style="text-align: center;">
-0.024
+0.025
 </td>
 <td style="text-align: center;">
-5.442
+5.44
 </td>
 <td style="text-align: center;">
-33.504
+30.553
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
--3.838
+-2.963
 </td>
 <td style="text-align: center;">
--2.914
+-1.802
 </td>
 <td style="text-align: center;">
--2.514
+-2.248
 </td>
 <td style="text-align: center;">
--1.42
+-0.93
 </td>
 <td style="text-align: center;">
--1.262
+-0.105
 </td>
 <td style="text-align: center;">
--1.295
+0.127
 </td>
 </tr>
 <tr>
@@ -703,37 +701,37 @@ Price
 5
 </td>
 <td style="text-align: center;">
-0.672
+0.582
 </td>
 <td style="text-align: center;">
 0.008
 </td>
 <td style="text-align: center;">
-5.446
+5.439
 </td>
 <td style="text-align: center;">
-34.689
+125.429
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
-0.875
+0.367
 </td>
 <td style="text-align: center;">
-0.715
+1.028
 </td>
 <td style="text-align: center;">
-0.677
+0.399
 </td>
 <td style="text-align: center;">
-0.966
+0.915
 </td>
 <td style="text-align: center;">
-1.004
+0.998
 </td>
 <td style="text-align: center;">
-0.95
+1.036
 </td>
 </tr>
 <tr>
@@ -744,37 +742,37 @@ Price
 10
 </td>
 <td style="text-align: center;">
-7.966
+8.351
 </td>
 <td style="text-align: center;">
 0.017
 </td>
 <td style="text-align: center;">
-5.446
+5.439
 </td>
 <td style="text-align: center;">
-52.516
+57.137
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
-0.807
+1.757
 </td>
 <td style="text-align: center;">
-0.632
+1.622
 </td>
 <td style="text-align: center;">
-0.745
+0.652
 </td>
 <td style="text-align: center;">
-0.868
+0.971
 </td>
 <td style="text-align: center;">
-0.702
+0.769
 </td>
 <td style="text-align: center;">
-0.573
+0.553
 </td>
 </tr>
 <tr>
@@ -796,22 +794,22 @@ Price
  
 </td>
 <td style="border-bottom: 2px solid grey; text-align: center;">
-4.646
+4.719
 </td>
 <td style="border-bottom: 2px solid grey; text-align: center;">
-3.546
+3.424
 </td>
 <td style="border-bottom: 2px solid grey; text-align: center;">
-3.259
+2.901
 </td>
 <td style="border-bottom: 2px solid grey; text-align: center;">
-2.289
+1.901
 </td>
 <td style="border-bottom: 2px solid grey; text-align: center;">
-1.964
+0.873
 </td>
 <td style="border-bottom: 2px solid grey; text-align: center;">
-1.868
+0.426
 </td>
 </tr>
 </tbody>
@@ -944,13 +942,13 @@ Returns
  
 </td>
 <td style="text-align: center;">
-4.507
+3.405
 </td>
 <td style="text-align: center;">
-1.583
+1.682
 </td>
 <td style="text-align: center;">
-4.422
+3.32
 </td>
 <td style="text-align: center;">
 -0.085
@@ -959,46 +957,46 @@ Returns
  
 </td>
 <td style="text-align: center;">
-4.161
+2.486
 </td>
 <td style="text-align: center;">
-2.121
+1.074
 </td>
 <td style="text-align: center;">
-3.576
+2.026
 </td>
 <td style="text-align: center;">
--0.585
+-0.46
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
-4.053
+2.674
 </td>
 <td style="text-align: center;">
-2.011
+0.638
 </td>
 <td style="text-align: center;">
-3.231
+2.094
 </td>
 <td style="text-align: center;">
--0.822
+-0.58
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
-3.409
+1.81
 </td>
 <td style="text-align: center;">
-1.364
+0.244
 </td>
 <td style="text-align: center;">
-2.678
+1.149
 </td>
 <td style="text-align: center;">
--0.731
+-0.661
 </td>
 </tr>
 <tr>
@@ -1009,61 +1007,61 @@ Returns
  
 </td>
 <td style="text-align: center;">
--2.937
+-3.835
 </td>
 <td style="text-align: center;">
--1.836
+-1.648
 </td>
 <td style="text-align: center;">
--5.318
+-1.827
 </td>
 <td style="text-align: center;">
--2.381
+2.008
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
--2.254
+-2.5
 </td>
 <td style="text-align: center;">
--1.819
+-0.68
 </td>
 <td style="text-align: center;">
--4.175
+-0.659
 </td>
 <td style="text-align: center;">
--1.921
+1.841
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
--2.238
+-3.227
 </td>
 <td style="text-align: center;">
--1.321
+-1.146
 </td>
 <td style="text-align: center;">
--3.62
+-1.466
 </td>
 <td style="text-align: center;">
--1.382
+1.761
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
--1.344
+-2.134
 </td>
 <td style="text-align: center;">
--0.313
+-0.144
 </td>
 <td style="text-align: center;">
--2.566
+-0.1
 </td>
 <td style="text-align: center;">
--1.222
+2.034
 </td>
 </tr>
 <tr>
@@ -1074,61 +1072,61 @@ Returns
  
 </td>
 <td style="text-align: center;">
-1.238
+0.264
 </td>
 <td style="text-align: center;">
-1.277
+0.283
 </td>
 <td style="text-align: center;">
-0.578
+0.626
 </td>
 <td style="text-align: center;">
--0.66
+0.362
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
-1.018
+0.862
 </td>
 <td style="text-align: center;">
-1.083
+0.948
 </td>
 <td style="text-align: center;">
-0.271
+0.787
 </td>
 <td style="text-align: center;">
--0.747
+-0.075
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
-1.042
+0.304
 </td>
 <td style="text-align: center;">
-0.791
+0.147
 </td>
 <td style="text-align: center;">
-0.013
+0.177
 </td>
 <td style="text-align: center;">
--1.029
+-0.127
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
-1.109
+0.739
 </td>
 <td style="text-align: center;">
-1.029
+0.629
 </td>
 <td style="text-align: center;">
-0.433
+0.983
 </td>
 <td style="text-align: center;">
--0.676
+0.244
 </td>
 </tr>
 <tr>
@@ -1139,61 +1137,61 @@ Returns
  
 </td>
 <td style="text-align: center;">
-1.57
+-0.43
 </td>
 <td style="text-align: center;">
--0.252
+0.034
 </td>
 <td style="text-align: center;">
--0.895
+1.493
 </td>
 <td style="text-align: center;">
--2.466
+1.923
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
-1.906
+-0.014
 </td>
 <td style="text-align: center;">
-0.302
+0.394
 </td>
 <td style="text-align: center;">
--0.599
+1.368
 </td>
 <td style="text-align: center;">
--2.506
+1.382
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
-1.815
+-0.552
 </td>
 <td style="text-align: center;">
-0.69
+-0.508
 </td>
 <td style="text-align: center;">
--0.388
+0.628
 </td>
 <td style="text-align: center;">
--2.204
+1.18
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
-2.065
+-0.324
 </td>
 <td style="text-align: center;">
-1.052
+0.1
 </td>
 <td style="text-align: center;">
-0.113
+1.049
 </td>
 <td style="text-align: center;">
--1.953
+1.373
 </td>
 </tr>
 <tr>
@@ -1209,61 +1207,61 @@ Returns
  
 </td>
 <td style="text-align: center;">
-5.201
+6.031
 </td>
 <td style="text-align: center;">
-1.882
+3.159
 </td>
 <td style="text-align: center;">
-4.295
+4.858
 </td>
 <td style="text-align: center;">
--0.906
+-1.173
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
-4.989
+4.837
 </td>
 <td style="text-align: center;">
-1.921
+1.734
 </td>
 <td style="text-align: center;">
-3.566
+3.819
 </td>
 <td style="text-align: center;">
--1.423
+-1.018
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
-4.565
+4.108
 </td>
 <td style="text-align: center;">
-1.658
+1.173
 </td>
 <td style="text-align: center;">
-2.854
+3.329
 </td>
 <td style="text-align: center;">
--1.711
+-0.779
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
-3.548
+2.829
 </td>
 <td style="text-align: center;">
-1.143
+0.641
 </td>
 <td style="text-align: center;">
-1.957
+1.986
 </td>
 <td style="text-align: center;">
--1.591
+-0.843
 </td>
 </tr>
 <tr>
@@ -1274,61 +1272,61 @@ Returns
  
 </td>
 <td style="text-align: center;">
--4.208
+-4.893
 </td>
 <td style="text-align: center;">
--2.294
+-1.901
 </td>
 <td style="text-align: center;">
--4.503
+-2.265
 </td>
 <td style="text-align: center;">
--0.294
+2.628
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
--3.472
+-3.616
 </td>
 <td style="text-align: center;">
--1.698
+-0.641
 </td>
 <td style="text-align: center;">
--3.642
+-1.45
 </td>
 <td style="text-align: center;">
--0.17
+2.165
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
--3.207
+-3.741
 </td>
 <td style="text-align: center;">
--1.241
+-1.076
 </td>
 <td style="text-align: center;">
--2.762
+-1.828
 </td>
 <td style="text-align: center;">
-0.445
+1.913
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
--2.054
+-2.46
 </td>
 <td style="text-align: center;">
--0.291
+-0.044
 </td>
 <td style="text-align: center;">
--1.661
+-0.245
 </td>
 <td style="text-align: center;">
-0.393
+2.215
 </td>
 </tr>
 <tr>
@@ -1339,61 +1337,61 @@ Returns
  
 </td>
 <td style="text-align: center;">
-1.122
+0.216
 </td>
 <td style="text-align: center;">
-1.147
+0.325
 </td>
 <td style="text-align: center;">
-0.71
+-0.027
 </td>
 <td style="text-align: center;">
--0.413
+-0.243
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
-0.869
+0.966
 </td>
 <td style="text-align: center;">
-0.962
+0.959
 </td>
 <td style="text-align: center;">
-0.266
+0.802
 </td>
 <td style="text-align: center;">
--0.603
+-0.164
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
-0.781
+0.441
 </td>
 <td style="text-align: center;">
-0.882
+0.256
 </td>
 <td style="text-align: center;">
-0.377
+0.099
 </td>
 <td style="text-align: center;">
--0.404
+-0.342
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
-0.906
+0.655
 </td>
 <td style="text-align: center;">
-1.124
+0.797
 </td>
 <td style="text-align: center;">
-0.772
+0.971
 </td>
 <td style="text-align: center;">
--0.134
+0.317
 </td>
 </tr>
 <tr>
@@ -1404,61 +1402,61 @@ Returns
  
 </td>
 <td style="text-align: center;">
-0.992
+1.138
 </td>
 <td style="text-align: center;">
--0.413
+1.259
 </td>
 <td style="text-align: center;">
--0.208
+2.593
 </td>
 <td style="text-align: center;">
--1.2
+1.455
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
-1.517
+1.221
 </td>
 <td style="text-align: center;">
-0.224
+1.093
 </td>
 <td style="text-align: center;">
--0.075
+2.369
 </td>
 <td style="text-align: center;">
--1.593
+1.147
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
-1.358
+0.368
 </td>
 <td style="text-align: center;">
-0.417
+0.098
 </td>
 <td style="text-align: center;">
-0.092
+1.501
 </td>
 <td style="text-align: center;">
--1.266
+1.134
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
-1.494
+0.369
 </td>
 <td style="text-align: center;">
-0.852
+0.597
 </td>
 <td style="text-align: center;">
-0.296
+1.741
 </td>
 <td style="text-align: center;">
--1.198
+1.372
 </td>
 </tr>
 <tr>
@@ -1474,61 +1472,61 @@ Returns
  
 </td>
 <td style="text-align: center;">
-6.242
+6.517
 </td>
 <td style="text-align: center;">
-2.095
+2.945
 </td>
 <td style="text-align: center;">
-3.978
+5.794
 </td>
 <td style="text-align: center;">
--2.264
+-0.722
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
-4.805
+5.084
 </td>
 <td style="text-align: center;">
-1.941
+1.044
 </td>
 <td style="text-align: center;">
-3.434
+4.039
 </td>
 <td style="text-align: center;">
--1.371
+-1.045
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
-4.451
+4.341
 </td>
 <td style="text-align: center;">
-1.844
+1.004
 </td>
 <td style="text-align: center;">
-2.926
+3.452
 </td>
 <td style="text-align: center;">
--1.524
+-0.889
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
-3.431
+3.24
 </td>
 <td style="text-align: center;">
-1.095
+0.452
 </td>
 <td style="text-align: center;">
-1.904
+2.048
 </td>
 <td style="text-align: center;">
--1.527
+-1.193
 </td>
 </tr>
 <tr>
@@ -1539,61 +1537,61 @@ Returns
  
 </td>
 <td style="text-align: center;">
--5.032
+-4.376
 </td>
 <td style="text-align: center;">
--2.065
+-2.275
 </td>
 <td style="text-align: center;">
--3.751
+-2.859
 </td>
 <td style="text-align: center;">
-1.281
+1.517
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
--3.888
+-3.849
 </td>
 <td style="text-align: center;">
--1.447
+-0.419
 </td>
 <td style="text-align: center;">
--3.094
+-1.875
 </td>
 <td style="text-align: center;">
-0.793
+1.975
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
--3.581
+-3.974
 </td>
 <td style="text-align: center;">
--1.232
+-1.072
 </td>
 <td style="text-align: center;">
--2.281
+-1.936
 </td>
 <td style="text-align: center;">
-1.301
+2.038
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
--2.492
+-2.793
 </td>
 <td style="text-align: center;">
--0.222
+-0.005
 </td>
 <td style="text-align: center;">
--1.194
+-0.299
 </td>
 <td style="text-align: center;">
-1.298
+2.493
 </td>
 </tr>
 <tr>
@@ -1604,61 +1602,61 @@ Returns
  
 </td>
 <td style="text-align: center;">
-0.94
+0.485
 </td>
 <td style="text-align: center;">
-0.8
+0.114
 </td>
 <td style="text-align: center;">
--0.019
+1.053
 </td>
 <td style="text-align: center;">
--0.959
+0.568
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
-0.869
+1.128
 </td>
 <td style="text-align: center;">
-0.696
+1.045
 </td>
 <td style="text-align: center;">
-0.095
+1.338
 </td>
 <td style="text-align: center;">
--0.773
+0.21
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
-0.795
+0.575
 </td>
 <td style="text-align: center;">
-0.479
+0.421
 </td>
 <td style="text-align: center;">
-0.234
+0.385
 </td>
 <td style="text-align: center;">
--0.562
+-0.19
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
-0.902
+0.931
 </td>
 <td style="text-align: center;">
-0.683
+0.879
 </td>
 <td style="text-align: center;">
-0.757
+1.171
 </td>
 <td style="text-align: center;">
--0.145
+0.241
 </td>
 </tr>
 <tr>
@@ -1669,61 +1667,61 @@ Returns
  
 </td>
 <td style="text-align: center;">
-1.21
+2.141
 </td>
 <td style="text-align: center;">
-0.03
+0.669
 </td>
 <td style="text-align: center;">
-0.227
+2.935
 </td>
 <td style="text-align: center;">
--0.983
+0.794
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
-0.917
+1.235
 </td>
 <td style="text-align: center;">
-0.494
+0.624
 </td>
 <td style="text-align: center;">
-0.339
+2.165
 </td>
 <td style="text-align: center;">
--0.578
+0.93
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
-0.87
+0.367
 </td>
 <td style="text-align: center;">
-0.612
+-0.067
 </td>
 <td style="text-align: center;">
-0.646
+1.516
 </td>
 <td style="text-align: center;">
--0.224
+1.149
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
-0.939
+0.448
 </td>
 <td style="text-align: center;">
-0.873
+0.447
 </td>
 <td style="text-align: center;">
-0.71
+1.748
 </td>
 <td style="text-align: center;">
--0.23
+1.301
 </td>
 </tr>
 <tr>
@@ -1739,61 +1737,61 @@ Returns
  
 </td>
 <td style="text-align: center;">
-6.391
+5.398
 </td>
 <td style="text-align: center;">
-3.045
+3.112
 </td>
 <td style="text-align: center;">
-4.495
+5.647
 </td>
 <td style="text-align: center;">
--1.896
+0.249
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
-5.123
+4.3
 </td>
 <td style="text-align: center;">
-1.955
+1.787
 </td>
 <td style="text-align: center;">
-3.556
+4.18
 </td>
 <td style="text-align: center;">
--1.567
+-0.12
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
-4.739
+3.827
 </td>
 <td style="text-align: center;">
-1.862
+1.646
 </td>
 <td style="text-align: center;">
-3.173
+3.226
 </td>
 <td style="text-align: center;">
--1.566
+-0.601
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
-3.877
+2.614
 </td>
 <td style="text-align: center;">
-1.04
+1.016
 </td>
 <td style="text-align: center;">
-1.943
+2.07
 </td>
 <td style="text-align: center;">
--1.934
+-0.545
 </td>
 </tr>
 <tr>
@@ -1804,61 +1802,61 @@ Returns
  
 </td>
 <td style="text-align: center;">
--4.934
+-3.63
 </td>
 <td style="text-align: center;">
--2.704
+-2.334
 </td>
 <td style="text-align: center;">
--3.876
+-2.921
 </td>
 <td style="text-align: center;">
-1.059
+0.709
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
--3.975
+-3.017
 </td>
 <td style="text-align: center;">
--1.725
+-0.548
 </td>
 <td style="text-align: center;">
--3.041
+-1.831
 </td>
 <td style="text-align: center;">
-0.934
+1.185
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
--3.729
+-3.365
 </td>
 <td style="text-align: center;">
--1.505
+-1.524
 </td>
 <td style="text-align: center;">
--2.306
+-1.85
 </td>
 <td style="text-align: center;">
-1.423
+1.514
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
--2.723
+-2.05
 </td>
 <td style="text-align: center;">
--0.502
+-0.389
 </td>
 <td style="text-align: center;">
--1.031
+-0.341
 </td>
 <td style="text-align: center;">
-1.692
+1.709
 </td>
 </tr>
 <tr>
@@ -1869,61 +1867,61 @@ Returns
  
 </td>
 <td style="text-align: center;">
-0.972
+0.073
 </td>
 <td style="text-align: center;">
-1.107
+0.441
 </td>
 <td style="text-align: center;">
-0.544
+0.591
 </td>
 <td style="text-align: center;">
--0.428
+0.518
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
-0.832
+0.787
 </td>
 <td style="text-align: center;">
-0.987
+0.983
 </td>
 <td style="text-align: center;">
-0.321
+1.317
 </td>
 <td style="text-align: center;">
--0.511
+0.53
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
-0.745
+0.475
 </td>
 <td style="text-align: center;">
-0.896
+0.266
 </td>
 <td style="text-align: center;">
-0.388
+0.456
 </td>
 <td style="text-align: center;">
--0.358
+-0.019
 </td>
 <td style colspan="1">
  
 </td>
 <td style="text-align: center;">
-0.92
+0.698
 </td>
 <td style="text-align: center;">
-1.093
+0.779
 </td>
 <td style="text-align: center;">
-0.885
+1.272
 </td>
 <td style="text-align: center;">
--0.035
+0.574
 </td>
 </tr>
 <tr>
@@ -1934,61 +1932,61 @@ Returns
  
 </td>
 <td style="border-bottom: 2px solid grey; text-align: center;">
-1.456
+1.768
 </td>
 <td style="border-bottom: 2px solid grey; text-align: center;">
-0.342
+0.779
 </td>
 <td style="border-bottom: 2px solid grey; text-align: center;">
-0.62
+2.727
 </td>
 <td style="border-bottom: 2px solid grey; text-align: center;">
--0.837
+0.958
 </td>
 <td style="border-bottom: 2px solid grey;" colspan="1">
  
 </td>
 <td style="border-bottom: 2px solid grey; text-align: center;">
-1.148
+1.283
 </td>
 <td style="border-bottom: 2px solid grey; text-align: center;">
-0.23
+1.238
 </td>
 <td style="border-bottom: 2px solid grey; text-align: center;">
-0.515
+2.349
 </td>
 <td style="border-bottom: 2px solid grey; text-align: center;">
--0.633
+1.065
 </td>
 <td style="border-bottom: 2px solid grey;" colspan="1">
  
 </td>
 <td style="border-bottom: 2px solid grey; text-align: center;">
-1.01
+0.462
 </td>
 <td style="border-bottom: 2px solid grey; text-align: center;">
-0.357
+0.122
 </td>
 <td style="border-bottom: 2px solid grey; text-align: center;">
-0.867
+1.376
 </td>
 <td style="border-bottom: 2px solid grey; text-align: center;">
--0.143
+0.914
 </td>
 <td style="border-bottom: 2px solid grey;" colspan="1">
  
 </td>
 <td style="border-bottom: 2px solid grey; text-align: center;">
-1.154
+0.564
 </td>
 <td style="border-bottom: 2px solid grey; text-align: center;">
-0.538
+0.627
 </td>
 <td style="border-bottom: 2px solid grey; text-align: center;">
-0.912
+1.728
 </td>
 <td style="border-bottom: 2px solid grey; text-align: center;">
--0.242
+1.164
 </td>
 </tr>
 </tbody>
@@ -2000,11 +1998,9 @@ Returns
 </tr>
 </tfoot>
 </table>
-<pre class="r"><code>r &lt;- left_join(w, secref, by = &quot;symbol&quot;) %&gt;%
-  select(- id)
-unique.tickers &lt;- unique(r$symbol)
-unique.sectors &lt;- unique(r$m.sec)
-unique.industries &lt;- unique(r$m.ind)</code></pre>
+<p>w2 &lt;- do_rank(z, 3, 10, 10)</p>
+<p>t2 &lt;- tbl_three(w2)</p>
+<p>htmlTable(round(t2, 3), #header = c(“Returns”, “1”, “2”, “3”, “0”, “1”, “2”, “3”, “0”, “1”, “2”, “3”, “0”, “1”, “2”, “3”, “0”), rnames = FALSE, rgroup = c(3, 6, 9, 12), n.rgroup = c(4, 4, 4,4), cgroup = c(“”, “k = 3”, “k = 6”, “k = 9”, “k = 12”), n.cgroup = c(1, 4, 4, 4, 4), tfoot = “† Portfolio 0 represents the difference between Portfolio 10 and Portfolio 1” ) ```</p>
 
 
 </div>

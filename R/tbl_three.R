@@ -1,4 +1,4 @@
-tbl_two <- function(w) {
+tbl_three <- function(w) {
   t <- select_data(w, c(3, 6, 9, 12), c(3, 6, 9, 12, 24, 36, 48, 60)) %>%
     group_by(j.ret,k.ret, prev.vol.rank, prev.ret.rank) %>%
     mutate_each(funs(mean), prev.returns, prev.vol, sz.rank, price) %>%
@@ -21,6 +21,7 @@ tbl_two <- function(w) {
     summarize(future.returns = mean(future.returns)) %>%
     spread(key = prev.vol.rank, value = future.returns) %>%
     mutate(`0` = `10` - `1`) %>%
+    select(- c(`2`, `3`, `4`, `6`, `7`, `8`, `9`)) %>%
     tbl_df
   k3 <- f %>%
     filter(k.ret == 3)
@@ -37,6 +38,7 @@ tbl_two <- function(w) {
   k.all <- left_join(k3.6, k9.12, by = c("j.ret", "prev.ret.rank"))
 
   all <- k.all %>%
+    filter(j.ret == 6) %>%
     select (- contains ("k.ret")) %>%
     select (- contains ("j.ret"))
 

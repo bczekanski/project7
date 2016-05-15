@@ -23,7 +23,7 @@ library(htmlTable)
 ```
 
 ```{r}
-x <- get_data()
+#x <- get_data()
 #x -> x
 #z -> z 
 y <- x 
@@ -35,14 +35,12 @@ y <- x
 ```
 
 ```{r}
-#head(z)
-# one <- comp_ret1(y)
-# two <- comp_ret2(y)
-# three <- comp_ret3(one, two)
-
-
-
-z <- compute_ret(y)
+#z -> z
+ one <- comp_ret1(y)
+ two <- comp_ret2(y)
+ three <- comp_ret3(one, two)
+z <- three
+#z <- compute_ret(y)
 #use_data(z, overwrite = TRUE)
 w <- do_rank(z, 10, 3, 10) 
 #use_data(w, overwrite  = TRUE)
@@ -83,10 +81,40 @@ w2 <- do_rank(z, 3, 10, 10)
 t2 <- tbl_three(w2)
 
 htmlTable(round(t2, 3),
-          header = c("Returns", "1", "2", "3", "0", "1", "2", "3", "0", "1", "2", "3", "0",  "1", "2", "3", "0"),
+          header = c("Returns", "1", "5", "10", "0", "1", "5", "10", "0", "1", "5", "10", "0", "1", "5", "10", "0"),
           rnames = FALSE,
-          rgroup = c(3, 6, 9, 12),
-          n.rgroup = c(4, 4, 4,4),
+          cgroup = c("", "k = 3", "k = 6", "k = 9", "k = 12"),
+          n.cgroup = c(1, 4, 4, 4, 4),
+          tfoot = "&dagger; Portfolio 0 represents the difference between Portfolio 10 and Portfolio 1"
+          )
+```
+
+```{r}
+w3 <- do_rank(z, 5, 5, 10)
+
+t3 <- tbl_three_b(w3)
+
+htmlTable(round(t2, 3),
+          header = c("Returns", "1", "3", "5", "0", "1", "3", "5", "0", "1", "3", "5", "0", "1", "3", "5", "0"),
+          rnames = FALSE,
+          cgroup = c("", "k = 3", "k = 6", "k = 9", "k = 12"),
+          n.cgroup = c(1, 4, 4, 4, 4),
+          tfoot = "&dagger; Portfolio 0 represents the difference between Portfolio 10 and Portfolio 1"
+          )
+
+```
+
+```{r}
+w4 <- z %>%
+  mutate(half = ntile(cap.usd, 2)) %>%
+  filter(half == 1)
+w4 <- do_rank(w4, 5, 5, 10)
+
+t4 <- tbl_three_b(w4)
+
+htmlTable(round(t2, 3),
+          header = c("Returns", "1", "3", "5", "0", "1", "3", "5", "0", "1", "3", "5", "0", "1", "3", "5", "0"),
+          rnames = FALSE,
           cgroup = c("", "k = 3", "k = 6", "k = 9", "k = 12"),
           n.cgroup = c(1, 4, 4, 4, 4),
           tfoot = "&dagger; Portfolio 0 represents the difference between Portfolio 10 and Portfolio 1"
@@ -94,16 +122,15 @@ htmlTable(round(t2, 3),
 ```
 
 
-
-
-
-
-
 ```{r}
-r <- left_join(w, secref, by = "symbol") %>%
-  select(- id)
-unique.tickers <- unique(r$symbol)
-unique.sectors <- unique(r$m.sec)
-unique.industries <- unique(r$m.ind)
+
+
 ```
+
+
+
+
+
+
+
 

@@ -8,7 +8,7 @@ prior_returns3 <- function(y, months){
     rename(c(returns2 = paste0(months, "_month_future_returns")))
 }
 
-for(i in c(1:12)) {prior_returns3(y, i) -> y}
+for(i in c(1, 2, 3, 6, 9, 12, 15, 18, 21, 24, 30, 36, 48, 60)) {prior_returns3(y, i) -> y}
 y <- y %>%
   gather(key = k.ret, value = future.returns, 7:ncol(y))
 y$k.ret  <- extract_numeric(y$k.ret)
@@ -21,7 +21,7 @@ prior_returns4 <- function(y, months){
     rename(c(vol2 = paste0(months, "_month_future_volume")))
 }
 
-for(i in c(1:12)) {prior_returns4(y, i) -> y}
+for(i in c(1, 2, 3, 6, 9, 12, 15, 18, 21, 24, 30, 36, 48, 60)) {prior_returns4(y, i) -> y}
 y <- y %>%
   gather(key = k.vol, value = future.vol, 9:ncol(y))
 y$k.vol  <- extract_numeric(y$k.vol)

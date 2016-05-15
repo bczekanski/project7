@@ -40,6 +40,20 @@ compute_ret <- function(y) {
     gather(key = k.ret, value = future.returns, 11:ncol(y))
   y$k.ret  <- extract_numeric(y$k.ret)
 
+prior_returns4 <- function(y, months){
+    y %>%
+      group_by(symbol) %>%
+      arrange(monthYear) %>%
+      mutate(vol2 = roll_mean(monthly_TV,  months, fill = NA, align = "left")) %>%
+      rename(c(vol2 = paste0(months, "_month_future_volume")))
+  }
+
+  for(i in c(1, 2, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36)) {prior_returns4(y, i) -> y}
+  y <- y %>%
+    gather(key = k.vol, value = future.vol, 13:ncol(y))
+  y$k.vol  <- extract_numeric(y$k.vol)
+
+
   # There needs to be some sort of lag
   # 3-1 the j=3 is from 1-1 to 3-31, while k = 3 is 3-1 to 5-30
 
