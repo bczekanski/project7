@@ -1,0 +1,109 @@
+---
+title: "Presentation Rmd"
+author: "Ben Czekanski"
+date: "May 15, 2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(knitr)
+library(ws.data)
+library(dplyr)
+library(lubridate)
+library(zoo)
+library(RcppRoll)
+library(ggplot2)
+library(reshape)
+#Dont want to use reshape long term
+library(tidyr)
+library(project7)
+library(htmlTable)
+```
+
+```{r}
+x <- get_data()
+#x -> x
+#z -> z 
+y <- x 
+
+
+#library(devtools)
+#use_data(x, overwrite = TRUE)
+
+```
+
+```{r}
+#head(z)
+# one <- comp_ret1(y)
+# two <- comp_ret2(y)
+# three <- comp_ret3(one, two)
+
+
+
+z <- compute_ret(y)
+#use_data(z, overwrite = TRUE)
+w <- do_rank(z, 10, 3, 10) 
+#use_data(w, overwrite  = TRUE)
+```
+
+```{r}
+v <- tbl_one(w)
+
+## Table One
+htmlTable(round(v, 3),
+          header = c("J", "Portfolio&dagger;", "Returns", "Volume", "SzRank", "Price", "3", "6", "9", "12", "24", "36"),
+          rnames = FALSE,
+          rgroup = c(3, 6, 9, 12),
+          n.rgroup = c(4, 4, 4,4),
+          cgroup = c("", "Returns per Month"),
+          n.cgroup = c(6, 6),
+          tfoot = "&dagger; Portfolio 0 represents the difference between Portfolio 10 and Portfolio 1"
+          )
+```
+
+```{r}
+t <- tbl_two(w)
+  
+  htmlTable(round(t, 3),
+          header = c("Returns", "1", "2", "3", "0", "1", "2", "3", "0", "1", "2", "3", "0",  "1", "2", "3", "0"),
+          rnames = FALSE,
+          rgroup = c(3, 6, 9, 12),
+          n.rgroup = c(4, 4, 4,4),
+          cgroup = c("", "k = 3", "k = 6", "k = 9", "k = 12"),
+          n.cgroup = c(1, 4, 4, 4, 4),
+          tfoot = "&dagger; Portfolio 0 represents the difference between Portfolio 10 and Portfolio 1"
+          )
+```
+
+```{r}
+w2 <- do_rank(z, 3, 10, 10)  
+
+t2 <- tbl_three(w2)
+
+htmlTable(round(t2, 3),
+          header = c("Returns", "1", "2", "3", "0", "1", "2", "3", "0", "1", "2", "3", "0",  "1", "2", "3", "0"),
+          rnames = FALSE,
+          rgroup = c(3, 6, 9, 12),
+          n.rgroup = c(4, 4, 4,4),
+          cgroup = c("", "k = 3", "k = 6", "k = 9", "k = 12"),
+          n.cgroup = c(1, 4, 4, 4, 4),
+          tfoot = "&dagger; Portfolio 0 represents the difference between Portfolio 10 and Portfolio 1"
+          )
+```
+
+
+
+
+
+
+
+```{r}
+r <- left_join(w, secref, by = "symbol") %>%
+  select(- id)
+unique.tickers <- unique(r$symbol)
+unique.sectors <- unique(r$m.sec)
+unique.industries <- unique(r$m.ind)
+```
+

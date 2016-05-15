@@ -36,15 +36,15 @@ y <- x
 
 ```{r}
 #head(z)
-one <- comp_ret1(y)
-two <- comp_ret2(y)
-three <- comp_ret3(one, two)
+# one <- comp_ret1(y)
+# two <- comp_ret2(y)
+# three <- comp_ret3(one, two)
 
 
 
-#z <- compute_ret(y)
+z <- compute_ret(y)
 #use_data(z, overwrite = TRUE)
-w <- do_rank(three) 
+w <- do_rank(z, 10, 3, 10) 
 #use_data(w, overwrite  = TRUE)
 ```
 
@@ -76,6 +76,28 @@ t <- tbl_two(w)
           tfoot = "&dagger; Portfolio 0 represents the difference between Portfolio 10 and Portfolio 1"
           )
 ```
+
+```{r}
+w2 <- do_rank(z, 3, 10, 10)  
+
+t2 <- tbl_three(w2)
+
+htmlTable(round(t2, 3),
+          header = c("Returns", "1", "2", "3", "0", "1", "2", "3", "0", "1", "2", "3", "0",  "1", "2", "3", "0"),
+          rnames = FALSE,
+          rgroup = c(3, 6, 9, 12),
+          n.rgroup = c(4, 4, 4,4),
+          cgroup = c("", "k = 3", "k = 6", "k = 9", "k = 12"),
+          n.cgroup = c(1, 4, 4, 4, 4),
+          tfoot = "&dagger; Portfolio 0 represents the difference between Portfolio 10 and Portfolio 1"
+          )
+```
+
+
+
+
+
+
 
 ```{r}
 r <- left_join(w, secref, by = "symbol") %>%
