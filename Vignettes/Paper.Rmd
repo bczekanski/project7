@@ -24,6 +24,8 @@ library(htmlTable)
 
 ```{r}
 #x <- get_data()
+#y <- get_monthly(x)
+
 #x -> x
 #z -> z 
 y <- x 
@@ -78,9 +80,9 @@ t <- tbl_two(w)
 ```{r}
 w2 <- do_rank(z, 3, 10, 10)  
 
-t2 <- tbl_three(w2)
+ten3 <- tbl_three(w2)
 
-htmlTable(round(t2, 3),
+htmlTable(round(ten3, 3),
           header = c("Returns", "1", "5", "10", "0", "1", "5", "10", "0", "1", "5", "10", "0", "1", "5", "10", "0"),
           rnames = FALSE,
           cgroup = c("", "k = 3", "k = 6", "k = 9", "k = 12"),
@@ -92,9 +94,9 @@ htmlTable(round(t2, 3),
 ```{r}
 w3 <- do_rank(z, 5, 5, 10)
 
-t3 <- tbl_three_b(w3)
+five5 <- tbl_three_b(w3)
 
-htmlTable(round(t2, 3),
+htmlTable(round(five5, 3),
           header = c("Returns", "1", "3", "5", "0", "1", "3", "5", "0", "1", "3", "5", "0", "1", "3", "5", "0"),
           rnames = FALSE,
           cgroup = c("", "k = 3", "k = 6", "k = 9", "k = 12"),
@@ -110,9 +112,9 @@ w4 <- z %>%
   filter(half == 1)
 w4 <- do_rank(w4, 5, 5, 10)
 
-t4 <- tbl_three_b(w4)
+five5_top_cap <- tbl_three_b(w4)
 
-htmlTable(round(t2, 3),
+htmlTable(round(five5_top_cap, 3),
           header = c("Returns", "1", "3", "5", "0", "1", "3", "5", "0", "1", "3", "5", "0", "1", "3", "5", "0"),
           rnames = FALSE,
           cgroup = c("", "k = 3", "k = 6", "k = 9", "k = 12"),
@@ -123,7 +125,18 @@ htmlTable(round(t2, 3),
 
 
 ```{r}
+tbl_4 <- tbl_four(w2)
 
+```
+
+```{r}
+a <- get_year(x)
+b <- compute_ret_years(y) 
+b <- b %>%
+  mutate(year = year(monthYear))
+c <- left_join(a, b, by = c("symbol", "year", "cap.usd")) %>%
+  na.omit
+d <- do_rank_year(c, 10, 3, 10)
 
 ```
 
