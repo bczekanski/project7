@@ -6,7 +6,7 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
 
 library(knitr)
 library(ws.data)
@@ -23,12 +23,12 @@ library(htmlTable)
 ```
 
 ```{r}
-#x <- get_data()
-#y <- get_monthly(x)
+x <- get_data()
+y <- get_monthly(x)
 
 #x -> x
 #z -> z 
-y <- x 
+#y <- x 
 
 
 #library(devtools)
@@ -47,6 +47,52 @@ z <- three
 w <- do_rank(z, 10, 3, 10) 
 #use_data(w, overwrite  = TRUE)
 ```
+    
+#Price Momentum and Trading Volume:
+###The Momentum Life Cycle Hypothesis
+
+##Abstract:
+
+##Intro
+This paper is a replicattion of "Price Momentum and Trading Volume," a 2000 paper by x and y published in the z issue of the Journal of Finance. 
+Questions being asked in paper
+
+##Literature Review
+Mostly review of original "Price Momentum and Trading Volume"
+Review the main articles they reference.
+
+##Data and Methodology
+What is the universe/ How was it filtered?
+General analysis and manipulation
+
+## Analysis
+Intro to chart: What question does it answer, what is the data in it, how did I get it in this form
+
+What we can conclude from this chart, why it matters
+
+Transition to next chart
+
+Repeat 11 more times
+
+##Conclusion of replication
+Summarize replication, review similarities and differences with original.
+
+##Intro to extension
+Re-explain MLC hypothesis
+What am I gonna do
+Charts & Tables
+What I did, what it means, why it matters
+Summarize and conclude extension
+
+## Conclusion
+Review replication
+Review Extension
+Connect
+INternal Validity
+External Validity
+Future Research
+Final, brief, thorough wrap up - If only read abstract, tables and this, what's my message?
+
 
 ```{r}
 v <- tbl_one(w)
@@ -62,7 +108,11 @@ htmlTable(round(v, 3),
           tfoot = "&dagger; Portfolio 0 represents the difference between Portfolio 10 and Portfolio 1"
           )
 ```
+What we can conclude from this chart, why it matters
 
+Transition to next chart
+
+Intro to chart: What question does it answer, what is the data in it, how did I get it in this form
 ```{r}
 t <- tbl_two(w)
   
@@ -125,7 +175,7 @@ htmlTable(round(five5_top_cap, 3),
 
 
 ```{r}
-tbl_4 <- tbl_four(w2)
+# tbl_4 <- tbl_four(w2)
 
 ```
 
@@ -135,7 +185,8 @@ b <- compute_ret_years(y)
 b <- b %>%
   mutate(year = year(monthYear))
 c <- left_join(a, b, by = c("symbol", "year", "cap.usd")) %>%
-  na.omit
+  na.omit %>%
+  mutate()
 d <- do_rank_year(c, 10, 3, 10)
 
 ```
