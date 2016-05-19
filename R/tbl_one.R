@@ -30,6 +30,6 @@ tbl_one <- function(w){
     spread(key = k.ret, value = future.returns) %>%
     #na.pass() %>%
     group_by(j.ret, prev.ret.rank) %>%
-    summarize_each(funs(mean), prev.returns, prev.vol, sz.rank, price, c(7:12))
+    summarize_each(funs(mean), prev.returns, prev.vol, sz.rank, price, c(7:14))
  return(t)
 }

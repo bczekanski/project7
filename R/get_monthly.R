@@ -16,7 +16,7 @@ get_monthly <- function(x) {
   x <- left_join(monthly_TV1, monthly_returns1, by = c("symbol", "monthYear")) %>%
     #mutate(month = month(monthYear)) %>%
     group_by(symbol) %>%
-    filter(price >= 1 , monthly_TV <= 1)  %>%
+    filter(price >= 1 , monthly_TV <= .5)  %>%
     tbl_df()
 
   }

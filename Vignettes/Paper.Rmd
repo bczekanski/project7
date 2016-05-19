@@ -30,7 +30,6 @@ y <- get_monthly(x)
 #z -> z 
 #y <- x 
 
-
 #library(devtools)
 #use_data(x, overwrite = TRUE)
 
@@ -54,15 +53,41 @@ w <- do_rank(z, 10, 3, 10)
 ##Abstract:
 
 ##Intro
-This paper is a replicattion of "Price Momentum and Trading Volume," a 2000 paper by x and y published in the z issue of the Journal of Finance. 
+This paper is a replication of "Price Momentum and Trading Volume," a paper by Charles M.C. Lee and Bhaskaran Swaminathan published in the October 2000 issue of The Journal of Finance. Their paper examines the link between stock returns and trading volume, two ISSUES that have each been examined by themselves, but seldom together. SUMMARIZE THEIR FINDINGS. In this paper I will re-examine the findings of Lee and Swaminathan with update stock data, and attempt to build off of their Momentum Life Cycle hypothesis by introducing future volume as part of this hypothesis.
+
 Questions being asked in paper
 
 ##Literature Review
 Mostly review of original "Price Momentum and Trading Volume"
 Review the main articles they reference.
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ##Data and Methodology
 What is the universe/ How was it filtered?
+
+  For their study, Lee and Swaminathan used all stocks on the NYSE and AMEX between January 1965 and December 1995. Within that selection, they also eliminated "any firm that was a prime, a closed-end fund, a real estate investment trust (REIT), and American Depository Receipt (ADR), or a foreign company." Lastly, they eliminated stocks whose return and volume data was unavailable, as well as stocks whose prices were less than one dollar on the portfolio formation date. 
+  My sample includes all US stocks??? whose data was available in the "ws.data" CRAN Package. From this data I ... I INCLUDED NASDAQ!!!
+  From this data 
+  
 General analysis and manipulation
 
 ## Analysis
@@ -74,45 +99,30 @@ Transition to next chart
 
 Repeat 11 more times
 
-##Conclusion of replication
-Summarize replication, review similarities and differences with original.
-
-##Intro to extension
-Re-explain MLC hypothesis
-What am I gonna do
-Charts & Tables
-What I did, what it means, why it matters
-Summarize and conclude extension
-
-## Conclusion
-Review replication
-Review Extension
-Connect
-INternal Validity
-External Validity
-Future Research
-Final, brief, thorough wrap up - If only read abstract, tables and this, what's my message?
 
 
+####Table One
+  Table One demonstrates the differences in performance for momentum-based strategies. Each month, every stock is placed in a portfolio based on its performance over the last J months. Each portfolio represents a decile of past returns, with "1" being the lowest performing decile, and "10" being the top decile. The next few columns show the summary statistics of each portfolio: average previous returns, average previous volume, the average market cap decile, and the average stock price. The "Returns per Month" columns show the average percentage return from each portfolio over selected months. Portfolio 11 represents the difference between portfolios 10 and 1.
 ```{r}
 v <- tbl_one(w)
 
 ## Table One
 htmlTable(round(v, 3),
-          header = c("J", "Portfolio&dagger;", "Returns", "Volume", "SzRank", "Price", "3", "6", "9", "12", "24", "36"),
+          header = c("J", "Portfolio&dagger;", "Returns", "Volume", "SzRank", "Price", "3", "6", "9", "12", "24", "36", "48", "60"),
           rnames = FALSE,
           rgroup = c(3, 6, 9, 12),
           n.rgroup = c(4, 4, 4,4),
           cgroup = c("", "Returns per Month"),
-          n.cgroup = c(6, 6),
+          n.cgroup = c(6, 8),
           tfoot = "&dagger; Portfolio 0 represents the difference between Portfolio 10 and Portfolio 1"
           )
 ```
-What we can conclude from this chart, why it matters
+ This chart shows that extreme returns generate more volume, which is consistent with the findings of Lee and Swaminathan. However, in theirs and previous studies, loser portfolios have had a lower volume than winners, and in this study the winner portfolio generally has slightly lower volume than the loser portfolio, while still maintaining significantly higher volume than the intermediate portfolio. 
 
-Transition to next chart
 
-Intro to chart: What question does it answer, what is the data in it, how did I get it in this form
+###Table Two
+To make Table Two, each month I put all stocks in portfolios based on performance and volume over the previous j months (3, 6, 9, 12) and EXAMINED their performance over the next k months(3, 6, 9, 12). The performance portfolios are based on decile, with 10 being the highest performing, 1 being the lowest, and 11 being the difference between portfolios 10 and 1. The results in table two differ greatly from those in the original paper found that in nearly every (j, k) case, the lower volume portfolio had higher future returns. My data shows the opposite, in almost all cases, the higher volume portfolio has a higher future return.
+
 ```{r}
 t <- tbl_two(w)
   
@@ -126,7 +136,10 @@ t <- tbl_two(w)
           tfoot = "&dagger; Portfolio 0 represents the difference between Portfolio 10 and Portfolio 1"
           )
 ```
+This pattern is surprising, and different than previous literature, but it is what my data shows, so ???
 
+
+Table Three is a robustness check on the results of Table Two. By breaking the return portfolios into thirds rather than deciles and the volume portfolios into deciles rather than thirds, we can check the consistency of the results of Table Two. 
 ```{r}
 w2 <- do_rank(z, 3, 10, 10)  
 
@@ -172,28 +185,132 @@ htmlTable(round(five5_top_cap, 3),
           tfoot = "&dagger; Portfolio 0 represents the difference between Portfolio 10 and Portfolio 1"
           )
 ```
+ Table Four shows results from combinations of five volume and five return portfolios, while Table Five shows the top 50% of stocks by market cap, broken into ten return portfolios and three volume portfolios. Tables Three, Four and Five all confirm the results from Table Two, that each low volume stocks generally perform worse than high volume stocks. This directly contradicts the findings of Lee and Swaminathan (and I do not know what to say about it).
 
+Transition to next chart
+
+Intro to chart: What question does it answer, what is the data in it, how did I get it in this form
 
 ```{r}
-# tbl_4 <- tbl_four(w2)
-
+#tbl_4 <- tbl_four(w2)
+#print(tbl_4)
 ```
+What we can conclude from this chart, why it matters
 
+Transition to next chart
+
+Intro to chart: What question does it answer, what is the data in it, how did I get it in this form
 ```{r}
 a <- get_year(x)
 b <- compute_ret_years(y) 
 b <- b %>%
   mutate(year = year(monthYear))
 c <- left_join(a, b, by = c("symbol", "year", "cap.usd")) %>%
-  na.omit %>%
-  mutate()
+  na.omit #%>%
+  #mutate()
 d <- do_rank_year(c, 10, 3, 10)
+e <- tbl_six(d)
+htmlTable(e)
+```
+What we can conclude from this chart, why it matters
+
+Transition to next chart
+
+Intro to chart: What question does it answer, what is the data in it, how did I get it in this form
+```{r}
+#e
 
 ```
 
 
 
+##Conclusion of replication
+Summarize replication, review similarities and differences with original.
 
+##Intro to extension
+Re-explain MLC hypothesis
+What am I gonna do
+Charts & Tables
+What I did, what it means, why it matters
+Summarize and conclude extension
+
+
+```{r}
+r <- left_join(w, secref, by = "symbol") %>%
+  select(- id)
+unique.tickers <- unique(r$symbol)
+unique.sectors <- unique(r$m.sec)
+unique.industries <- unique(r$m.ind)
+
+t <- r %>%
+     filter(j.ret == 6)
+
+    c <- t %>%
+      filter(prev.ret.rank == 10, prev.vol.rank == 1) %>%
+      ggplot(aes(k.ret, future.returns)) +
+      geom_jitter (aes(color = future.vol)) +
+      scale_colour_gradientn(limits = c(0.0000001, .5), colours=c("#372EFF","#FFFFFF","#FD3206"), trans = "log", values = c(0, .75, 1)) +
+      ggtitle("Low Volume Winners") +
+      xlab("Time Since Measurement (Months)") +
+      ylab("Average Forward Return (Percent)") +
+      labs(color = "Average Forward Volume") +
+      xlim(0, 13) +
+      ylim(-100, 100) -> p1
+
+    #c(0.00001, .1)
+
+    d <- t %>%
+      filter(prev.ret.rank == 1, prev.vol.rank == 3) %>%
+      ggplot(aes(k.ret, future.returns)) +
+      geom_jitter (aes(color = future.vol)) +
+      scale_colour_gradientn(limits = c(0.0000001, .5), colours=c("#372EFF","#FFFFFF","#FD3206"), trans = "log", values = c(0, .75, 1)) +
+      ggtitle("High Volume Losers") +
+      xlab("Time Since Measurement (Months)") +
+      ylab("Average Forward Return (Percent)") +
+      labs(color = "Average Forward Volume") +
+      xlim(0, 13) +
+      ylim(-100, 100) -> p2
+
+
+     a <- t %>%
+       filter(prev.ret.rank == 1, prev.vol.rank == 1) %>%
+      ggplot(aes(k.ret, future.returns)) +
+      geom_jitter (aes(color = future.vol)) +
+      scale_colour_gradientn(limits = c(0.0000001, .5), colours=c("#372EFF","#FFFFFF","#FD3206"), trans = "log", values = c(0, .75, 1)) +
+      ggtitle("Low Volume Losers") +
+      xlab("Time Since Measurement (Months)") +
+      ylab("Average Forward Return (Percent)") +
+      labs(color = "Average Forward Volume") +
+      xlim(0, 13) +
+      ylim(-100, 100) -> p3
+
+     b <- t %>%
+      filter(prev.ret.rank == 10, prev.vol.rank == 3) %>%
+      ggplot(aes(k.ret, future.returns, frame = j.ret)) +
+      geom_jitter (aes(color = future.vol)) +
+      scale_colour_gradientn(limits = c(0.0000001, .5), colours=c("#372EFF","#FFFFFF","#FD3206"), trans = "log", values = c(0, .75, 1)) +
+      ggtitle("High Volume Winners") +
+       xlab("Time Since Measurement (Months)") +
+      ylab("Average Forward Return (Percent)") +
+      labs(color = "Average Forward Volume") +
+      xlim(0, 13) +
+      ylim(-100, 100) -> p4
+
+
+
+      
+      print(multiplot(p4, p1, p2, p3, cols=2), height = 600, width = 1000)
+
+```
+
+## Conclusion
+Review replication
+Review Extension
+Connect
+INternal Validity
+External Validity
+Future Research
+Final, brief, thorough wrap up - If only read abstract, tables and this, what's my message?
 
 
 

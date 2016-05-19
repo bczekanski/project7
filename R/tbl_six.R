@@ -1,5 +1,5 @@
 tbl_six <- function(w) {
-  t <- d %>%
+  t <- w %>%
     #group_by(k.ret, prev.vol.rank, prev.ret.rank) %>%
     #mutate_each(funs(mean), prev.returns, prev.vol, sz.rank, price) %>%
     group_by(k.ret, prev.ret.rank, prev.vol.rank) %>%
@@ -27,16 +27,16 @@ tbl_six <- function(w) {
     spread(key = k.ret, value = future.returns) %>%
     arrange(prev.vol.rank) %>%
     tbl_df
-  v1 <- f %>%
-    filter(prev.vol.rank == 1)
-  v2 <- f %>%
-    filter(prev.vol.rank == 2)
-  v3 <- f %>%
-    filter(prev.vol.rank == 3)
+  # v1 <- f %>%
+  #   filter(prev.vol.rank == 1)
+  # v2 <- f %>%
+  #   filter(prev.vol.rank == 2)
+  # v3 <- f %>%
+  #   filter(prev.vol.rank == 3)
+  #
+  # e <- cbind(v1, v2)
+  # g <- cbind(e, v3) %>%
+  #   select (- contains ("j.ret"))
 
-  e <- cbind(v1, v2)
-  f <- cbind(e, v3) %>%
-    select (- contains ("j.ret"))
-
-  return(w)
+  return(f)
 }
